@@ -39,12 +39,12 @@ The purpose of this app is to find a recipe using Yummly's API to retrieve delic
 Find a working prototype with Node at https://shopping-list-capstone.herokuapp.com/ .
 
 ## Functionality
-* When the user brings up the landing page it explains the pupose of the app.
-* The user then enters the app and searches for recipes.  Once they have selected one they can search again or quit.
-* The user can assign a recipe to the day of the week.
-* The user can generate a shopping list and then delte items they already have.
-* The user can select when they have added an item to their basket or delete the list.
-* The user can view a list of links to recipes they have selected.
+* When the user brings up the main page it explains the purpose of the application.
+* The user then enters the app and logs in.  After they are logged in, the user is now redirected to search bar.
+* The user can search for recipes and select the recipes.
+* The user can generate a shopping list and edit the shopping list.
+* The user can print the final shopping list or save to their favorites to revisit at a later time.
+
 
 ## Technical
 
