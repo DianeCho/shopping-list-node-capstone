@@ -1,20 +1,20 @@
 # Shopping List Node Capstone
-The purpose of this app is to find a recipe and create a shopping list
+The purpose of this app is to find a recipe using Yummly's API to retrieve delicious recipes that users can create a shopping list
 
 # MVP workflow
-* Intro screen.
-* --> Explains app
-* ----> Click to continue.
-* ------> Search screen, user searches for recipe.
-* --------> Select a recipe
-* --------> Search again or quit.
-* ----------> Assign recipe to day.
-* Screen displays aggregate shopping list.
-* --> User can remove items that they already have.
+* Introduction screen.
+* --> Explanation of the application
+* ----> Click to Enter
+* ------> login to page to enter to the site.
+* --------> Search for recipes
+* --------> select recipes.
+* ----------> Add to favorites to return later.
+* Screen displays shopping list.
+* --> User can edit the shopping list.
 * ----> Click to continue.
 * ------> Final shopping list.
-* --------> User can delete items as they add to their basket.
-* ----------> Displays page with links to recipes.  User can delete list.
+* --------> User can print the shopping list
+* ----------> User can add shopping list to favorites.
 
 # User Stories
 * As a user I want to quickly understand the purpose of the site in order to use it to create a shopping list.
