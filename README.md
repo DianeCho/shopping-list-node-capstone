@@ -18,17 +18,15 @@ The purpose of this app is to find a recipe using Yummly's API to retrieve delic
 
 # User Stories
 * As a user I want to quickly understand the purpose of the site in order to use it to create a shopping list.
-![Landing page screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/1.png)
-* As a user I want to be able to search for recipes in order to find the ingredients to add to the shoppng list.
-![Landing page screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/2.png)
-* As a user I want to select a recipe and assign it to a day of the week in order to view the recipe for that day.
-![Landing page screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/3.png)
-* As a user I want to aggregate ingredients to a shopping list and view as a web page in order create the meal.
-![Landing page screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/4.png)
-* As a user I want to be able to delete items from the shopping list that I already have so I dont spend unnecassarily.
-![Landing page screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/5.png)
-* As a user I want to be able to delete the shopping list and menu once I am finished.
-![Landing page screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/6.png)
+![Landing page screen shot](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/pic1.png)
+* As a user I want to be able to login so I can return to the site and view saved recipes to favorites.
+![Landing page screen shot](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/pic2.png)
+* As a user I want to search for recipes that I would like to create a shopping list for.
+![Landing page screen shot](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/pic3.png)
+* As a user I want to select recipes or just recipe that I would liket to create a shopping list for.
+![Landing page screen shot](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/pic4.png)
+* As a user I want to be able to edit my shopping list, save to my favorites so I can revist later or print the list.
+![Landing page screen shot](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/pic5.png)
 
 ## Screenshots
 ![Landing page screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/cap1.png)
