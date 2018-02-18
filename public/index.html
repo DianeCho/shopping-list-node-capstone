@@ -8,36 +8,23 @@
 
 <body>
 
-    <h1>Find Delicious Recipes Easily!</h1>
+    <h1><img src="images/logo.jpeg" class="logo" alt="">Find Delicious Recipes Easily!</h1>
     <main id='intro' class=''>
         <p>Search, Print & GO!</p>
-        <ul>
-            <li>
-                <div></div>Search for delicious recipes.</li>
-            <li>
-                <div></div>Select recipes or save to favorites</li>
-            <li>
-                <div></div>Create a shopping list for the recipes.</li>
-            <li>
-                <div></div>Edit the shopping list.</li>
-
-            <li>
-                <div></div>Print & GO!</li>
-        </ul>
-        <div class=''><a href="search.html" class='button'>Enter</a></div>
-
+        <ol type="1">
+            <li>Search for delicious recipes.</li>
+            <li>Select recipes or save to favorites</li>
+            <li>Create a shopping list for the recipes.</li>
+            <li>Edit the shopping list.</li>
+            <li>Print & GO!</li>
+        </ol>
+        <button type="submit">Enter</button>
     </main>
 
 
-    <h2>Login Form</h2>
+    <h2><img src="images/logo.jpeg" class="logo" alt="">Login Form</h2>
 
     <form action="/action_page.php">
-        <!--
-<div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
-</div>
--->
-
         <div class="container">
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="uname" required>
@@ -51,14 +38,58 @@
                 </label>
         </div>
 
-        <div class="container" style="background-color:#f1f1f1">
+        <div class="container1">
             <button type="button" class="cancelbtn">Cancel</button>
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
     </form>
 
 
-    <footer>
+    <h2><img src="images/logo.jpeg" class="logo" alt="">Search Recipes</h2>
+    <form action="#" class="js-search-form">
+        <div class="container">
+            <label for="query"></label>
+            <input value="" type="text" class="js-query" placeholder="Find it here!">
+            <button type="submit" id="findIt">Search</button>
+        </div>
+    </form>
+
+
+    <h2><img src="images/logo.jpeg" class="logo" alt="">Recipes</h2>
+    <div class="container">
+        <ul class="yummly-search-results"></ul>
+    </div>
+
+
+    <h2><img src="images/logo.jpeg" class="logo" alt="">Shopping List</h2>
+    <!--
+    <div class="container-box">
+        <ul class="js-youtube-search-results"></ul>
+    </div>
+-->
+    <form action="/action_page.php">
+
+        <!--        <div class="container"></div>-->
+
+        <div class="container">
+            <ul class="button1">
+                <li>
+                    <button type="button" class='button2'>Edit</button>
+                </li>
+                <li>
+                    <button type="button" class='button2'>Print</button>
+                </li>
+                <li>
+                    <button type="button" class='button2'>Add to Favorites</button>
+                </li>
+
+            </ul>
+        </div>
+    </form>
+
+
+
+    <footer align='center'>
         <p>&copy;Diane Cho</p>
         <ul>
 

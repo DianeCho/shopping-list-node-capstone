@@ -1,10 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background: -webkit-linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.8)), -webkit-linear-gradient(rgba(20, 20, 20, 0.3), rgba(20, 20, 20, 0.3)), url("images/background-img.jpg");
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: ghostwhite;
 }
+
+
+h1,
+h2 {
+    text-align: center;
+    font-size: 40px;
+    padding: 2rem;
+    color: white;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 1rem;
+    border-radius: 23px;
+}
+
+#intro {
+    text-align: center;
+    border: 3px solid #f1f1f1;
+    padding: 12px 20px;
+}
+
 
 form {
     border: 3px solid #f1f1f1;
 }
+
 
 input[type=text],
 input[type=password] {
@@ -13,13 +52,16 @@ input[type=password] {
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
-    box-sizing: border-box;
+}
+
+.container1 {
+    padding: 12px 20px;
 }
 
 button {
     background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
+    padding: 10px 18px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
@@ -36,19 +78,11 @@ button:hover {
     background-color: #f44336;
 }
 
-/*
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
+.button2 {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
 }
-*/
-
-/*
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
-*/
 
 .container {
     padding: 16px;
@@ -57,8 +91,13 @@ img.avatar {
 span.psw {
     float: right;
     padding-top: 16px;
+    text-shadow: 1px 1px grey;
 }
 
+.button1 {
+    list-style: none;
+    /*    float: right;*/
+}
 
 footer li {
     display: inline-block;
@@ -69,6 +108,7 @@ footer li {
 footer li img {
     width: auto;
     max-height: 30px;
+    border-radius: 5px;
 }
 
 
