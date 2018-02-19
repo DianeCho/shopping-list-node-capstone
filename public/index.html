@@ -8,8 +8,10 @@
 
 <body>
 
-    <h1><img src="images/logo.jpeg" class="logo" alt="">Find Delicious Recipes Easily!</h1>
+    <!--   main page explaining about the app -->
+
     <main id='intro' class='js-main-page'>
+        <h1><img src="images/logo.jpeg" class="logo" alt="">Find Delicious Recipes Easily!</h1>
         <p>Search, Print & GO!</p>
         <ol type="1">
             <li>Search for delicious recipes.</li>
@@ -22,9 +24,11 @@
     </main>
 
 
-    <h2><img src="images/logo.jpeg" class="logo" alt="">Login Form</h2>
+    <!--   login form-->
+
 
     <form action="#" class="js-login-form">
+        <h2><img src="images/logo.jpeg" class="logo" alt="">Login Form</h2>
         <div class="container">
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="uname" required>
@@ -41,8 +45,10 @@
         </div>
     </form>
 
-    <h2><img src="images/logo.jpeg" class="logo" alt="">Register as New User</h2>
+    <!--   register as new user -->
+
     <form action="#" class="js-newuser-form">
+        <h2><img src="images/logo.jpeg" class="logo" alt="">Register as New User</h2>
         <div class="container">
             <div class="row">
                 <div class="col-25">
@@ -94,51 +100,104 @@
         </div>
     </form>
 
+    <!--search recipes-->
 
-    <h2><img src="images/logo.jpeg" class="logo" alt="">Search Recipes</h2>
     <form action="#" class="js-search-form">
+        <h2><img src="images/logo.jpeg" class="logo" alt="">Search Recipes</h2>
         <div class="container">
             <label for="query"></label>
-            <input value="" type="text" class="js-query" placeholder="Find it here!">
+            <input value="" type="text" class="js-query" placeholder="Search Recipes Here">
             <button type="submit" id="findIt">Search</button>
         </div>
     </form>
 
+    <!--list of recipes-->
+    <form action="#" class="js-ingredients-form">
+        <h2><img src="images/logo.jpeg" class="logo" alt="">Recipes</h2>
+        <div class="container-box">
+            <ul class="yummly-search-results">
+                <li>
+                    <div class="recipetitle">
+                        <label for="title">Title of Recipes</label>
+                    </div>
+                    <img src="images/recipe.jpg" class="recipe" alt=""><button type="button" class="addbtn">Add to list</button></li>
+                <li>
+                    <div class="recipetitle">
+                        <label for="title">Title of Recipes</label>
+                    </div><img src="images/recipe.jpg" class="recipe" alt=""><button type="button" class="addbtn">Add to list</button></li>
+                <li>
+                    <div class="recipetitle">
+                        <label for="title">Title of Recipes</label>
+                    </div><img src="images/recipe.jpg" class="recipe" alt=""><button type="button" class="addbtn">Add to list</button></li>
+                <li>
+                    <div class="recipetitle">
+                        <label for="title">Title of Recipes</label>
+                    </div><img src="images/recipe.jpg" class="recipe" alt=""><button type="button" class="addbtn">Add to list</button></li>
+            </ul>
+            <div class="container">
+                <label for="query"></label>
+                <button type="submit" id="continue">Continue</button>
+            </div>
+        </div>
+    </form>
 
-    <h2><img src="images/logo.jpeg" class="logo" alt="">Recipes</h2>
-    <div class="container">
-        <ul class="yummly-search-results"></ul>
-    </div>
 
 
-    <h2><img src="images/logo.jpeg" class="logo" alt="">Shopping List</h2>
-    <!--
-    <div class="container-box">
-        <ul class="js-youtube-search-results"></ul>
-    </div>
--->
+
+    <!--   shopping list of ingredients-->
     <form action="#" class="js-shoppinglist-form">
-
-        <!--        <div class="container"></div>-->
-
+        <h2><img src="images/logo.jpeg" class="logo" alt="">Shopping List</h2>
         <div class="container">
+            <ul>
+                <li>
+                    <div class="ingredients-box">
+                        <label for="ingredients">ingredients</label>
+                        <button type="button" class="addbtn">Delete</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="ingredients-box">
+                        <label for="ingredients">ingredients</label>
+                        <button type="button" class="addbtn">Delete</button></div>
+                </li>
+                <li>
+                    <div class="ingredients-box">
+                        <label for="ingredients">ingredients</label>
+                        <button type="button" class="addbtn">Delete</button></div>
+                </li>
+                <li>
+                    <div class="ingredients-box">
+                        <label for="ingredients">ingredients</label>
+                        <button type="button" class="addbtn">Delete</button> </div>
+                </li>
+                <li>
+                    <div class="ingredients-box">
+                        <label for="ingredients">ingredients</label>
+                        <button type="button" class="addbtn">Delete</button></div>
+                </li>
+                <li>
+                    <div class="ingredients-box">
+                        <label for="ingredients">ingredients</label>
+                        <button type="button" class="addbtn">Delete</button></div>
+                </li>
+            </ul>
+
             <ul class="button1">
                 <li>
-                    <button type="button" class='button2'>Edit</button>
+                    <button type="button" class='button2' id="add">Add</button>
                 </li>
                 <li>
                     <button type="button" class='button2' id="print">Print</button>
                 </li>
                 <li>
-                    <button type="button" class='button2'>Add to Favorites</button>
+                    <button type="button" class='button2' id="returnbtn">Return to Search</button>
                 </li>
-
             </ul>
         </div>
     </form>
 
 
-
+    <!--footer-->
     <footer align='center'>
         <p>&copy;Diane Cho</p>
         <ul>
