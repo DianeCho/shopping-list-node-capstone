@@ -18,6 +18,10 @@ body {
     color: ghostwhite;
 }
 
+.button1 {
+    text-align: right;
+}
+
 
 h1,
 h2 {
@@ -88,15 +92,26 @@ button:hover {
     padding: 16px;
 }
 
+.container1 button1 {
+    padding: 16px;
+    text-align: right;
+}
+
 span.psw {
     float: right;
     padding-top: 16px;
     text-shadow: 1px 1px grey;
 }
 
+span.newuser {
+    float: right;
+    padding-top: 16px;
+    margin-left: 20px;
+    text-shadow: 1px 1px grey;
+}
+
 .button1 {
     list-style: none;
-    /*    float: right;*/
 }
 
 footer li {

@@ -9,7 +9,7 @@
 <body>
 
     <h1><img src="images/logo.jpeg" class="logo" alt="">Find Delicious Recipes Easily!</h1>
-    <main id='intro' class=''>
+    <main id='intro' class='js-main-page'>
         <p>Search, Print & GO!</p>
         <ol type="1">
             <li>Search for delicious recipes.</li>
@@ -31,16 +31,66 @@
 
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
-
             <button type="submit">Login</button>
-            <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
         </div>
 
         <div class="container1">
             <button type="button" class="cancelbtn">Cancel</button>
+            <span class="newuser">Register as <a href="#">new user?</a></span>
             <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+
+    <h2><img src="images/logo.jpeg" class="logo" alt="">Register as New User</h2>
+    <form action="#" class="js-newuser-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">First Name</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="fname" name="firstname" placeholder="First Name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="lname">Last Name</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="lname" name="lastname" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="email">Email address</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="email" name="email" placeholder="Email Address">
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="npassword">New Password</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="npassword" name="npassword" placeholder="New Password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="cpassword">Confirm Password</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="cpassword" name="cpassword" placeholder="Confirm Password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="submit">Register</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 
@@ -77,7 +127,7 @@
                     <button type="button" class='button2'>Edit</button>
                 </li>
                 <li>
-                    <button type="button" class='button2'>Print</button>
+                    <button type="button" class='button2' id="print">Print</button>
                 </li>
                 <li>
                     <button type="button" class='button2'>Add to Favorites</button>
