@@ -77,6 +77,7 @@ button:hover {
 }
 
 .cancelbtn,
+.deletebtn,
 .addbtn {
     width: auto;
     padding: 10px 18px;
@@ -84,6 +85,11 @@ button:hover {
 }
 
 .addbtn {
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.deletebtn {
     margin-left: 1rem;
     margin-top: 2rem;
 }

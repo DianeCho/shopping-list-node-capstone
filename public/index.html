@@ -35,7 +35,7 @@
 
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
-            <button type="submit">Login</button>
+            <button type="submit" class="login">Login</button>
         </div>
 
         <div class="container1">
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <button type="submit">Register</button>
+                        <button type="submit" class="registerbtn">Register</button>
                     </div>
                 </div>
             </div>
@@ -107,11 +107,12 @@
         <div class="container">
             <label for="query"></label>
             <input value="" type="text" class="js-query" placeholder="Search Recipes Here">
-            <button type="submit" id="findIt">Search</button>
+            <button type="submit" id="findIt" class="searchbtn">Search</button>
         </div>
     </form>
 
     <!--list of recipes-->
+
     <form action="#" class="js-ingredients-form">
         <h2><img src="images/logo.jpeg" class="logo" alt="">Recipes</h2>
         <div class="container-box">
@@ -136,7 +137,7 @@
             </ul>
             <div class="container">
                 <label for="query"></label>
-                <button type="submit" id="continue">Continue</button>
+                <button type="submit" id="continue" class="continuebtn">Continue</button>
             </div>
         </div>
     </form>
@@ -145,6 +146,7 @@
 
 
     <!--   shopping list of ingredients-->
+
     <form action="#" class="js-shoppinglist-form">
         <h2><img src="images/logo.jpeg" class="logo" alt="">Shopping List</h2>
         <div class="container">
@@ -152,45 +154,45 @@
                 <li>
                     <div class="ingredients-box">
                         <label for="ingredients">ingredients</label>
-                        <button type="button" class="addbtn">Delete</button>
+                        <button type="button" class="deletebtn">Delete</button>
                     </div>
                 </li>
                 <li>
                     <div class="ingredients-box">
                         <label for="ingredients">ingredients</label>
-                        <button type="button" class="addbtn">Delete</button></div>
+                        <button type="button" class="deletebtn">Delete</button></div>
                 </li>
                 <li>
                     <div class="ingredients-box">
                         <label for="ingredients">ingredients</label>
-                        <button type="button" class="addbtn">Delete</button></div>
+                        <button type="button" class="deletebtn">Delete</button></div>
                 </li>
                 <li>
                     <div class="ingredients-box">
                         <label for="ingredients">ingredients</label>
-                        <button type="button" class="addbtn">Delete</button> </div>
+                        <button type="button" class="deletebtn">Delete</button> </div>
                 </li>
                 <li>
                     <div class="ingredients-box">
                         <label for="ingredients">ingredients</label>
-                        <button type="button" class="addbtn">Delete</button></div>
+                        <button type="button" class="deletebtn">Delete</button></div>
                 </li>
                 <li>
                     <div class="ingredients-box">
                         <label for="ingredients">ingredients</label>
-                        <button type="button" class="addbtn">Delete</button></div>
+                        <button type="button" class="deletebtn">Delete</button></div>
                 </li>
             </ul>
 
             <ul class="button1">
                 <li>
-                    <button type="button" class='button2' id="add">Add</button>
-                </li>
-                <li>
-                    <button type="button" class='button2' id="print">Print</button>
+                    <button type="button" class='button2' id="add">Add More Ingredients</button>
                 </li>
                 <li>
                     <button type="button" class='button2' id="returnbtn">Return to Search</button>
+                </li>
+                <li>
+                    <button type="button" class='button2' id="print">Print</button>
                 </li>
             </ul>
         </div>
@@ -198,6 +200,7 @@
 
 
     <!--footer-->
+
     <footer align='center'>
         <p>&copy;Diane Cho</p>
         <ul>
