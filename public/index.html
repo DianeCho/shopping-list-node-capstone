@@ -26,94 +26,97 @@
 
     <!--   login form-->
 
+    <main class="js-login-page">
+        <form action="#" class="js-login-form">
+            <h2><img src="images/logo.jpeg" class="logo" alt="">Login Form</h2>
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
 
-    <form action="#" class="js-login-form">
-        <h2><img src="images/logo.jpeg" class="logo" alt="">Login Form</h2>
-        <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <button type="submit" class="login">Login</button>
+            </div>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-            <button type="submit" class="login">Login</button>
-        </div>
-
-        <div class="container1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="newuser">Register as <a href="#">new user?</a></span>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
+            <div class="container1">
+                <!--           <button type="button" class="cancelbtn">Cancel</button>-->
+                <span class="newuser">Register as <a href="#">new user?</a></span>
+                <!--            <span class="psw">Forgot <a href="#">password?</a></span>-->
+            </div>
+        </form>
+    </main>
 
     <!--   register as new user -->
-
-    <form action="#" class="js-newuser-form">
-        <h2><img src="images/logo.jpeg" class="logo" alt="">Register as New User</h2>
-        <div class="container">
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">First Name</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="fname" name="firstname" placeholder="First Name">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="lname">Last Name</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="lname" name="lastname" placeholder="Last Name">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="email">Email address</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="email" name="email" placeholder="Email Address">
-                </div>
-            </div>
-            <div class="row">
+    <main class="js-newuser-page">
+        <form action="#" class="js-newuser-form">
+            <h2><img src="images/logo.jpeg" class="logo" alt="">Register as New User</h2>
+            <div class="container">
                 <div class="row">
                     <div class="col-25">
-                        <label for="npassword">New Password</label>
+                        <label for="fname">First Name</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="npassword" name="npassword" placeholder="New Password">
+                        <input type="text" id="fname" name="firstname" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Last Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="lname" name="lastname" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="email">Email address</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="email" name="email" placeholder="Email Address">
                     </div>
                 </div>
                 <div class="row">
                     <div class="row">
                         <div class="col-25">
-                            <label for="cpassword">Confirm Password</label>
+                            <label for="npassword">New Password</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="cpassword" name="cpassword" placeholder="Confirm Password">
+                            <input type="text" id="npassword" name="npassword" placeholder="New Password">
                         </div>
                     </div>
                     <div class="row">
-                        <button type="submit" class="registerbtn">Register</button>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="cpassword">Confirm Password</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" id="cpassword" name="cpassword" placeholder="Confirm Password">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="registerbtn">Register</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </main>
 
     <!--search recipes-->
-
-    <form action="#" class="js-search-form">
-        <h2><img src="images/logo.jpeg" class="logo" alt="">Search Recipes</h2>
-        <div class="container">
-            <label for="query"></label>
-            <input value="" type="text" class="js-query" placeholder="Search Recipes Here">
-            <button type="submit" id="findIt" class="searchbtn">Search</button>
-        </div>
-    </form>
+    <main class="js-search-page">
+        <form action="#" class="js-search-form">
+            <h2><img src="images/logo.jpeg" class="logo" alt="">Search Recipes</h2>
+            <div class="container">
+                <label for="query"></label>
+                <input value="" type="text" class="js-query" placeholder="Search Recipes Here">
+                <button type="submit" id="findIt" class="searchbtn">Search</button>
+            </div>
+        </form>
+    </main>
 
     <!--list of recipes-->
-
-    <form action="#" class="js-ingredients-form">
+    <main class="js-ingredients-page">
+        <!--    <form action="#" class="js-ingredients-form">-->
         <h2><img src="images/logo.jpeg" class="logo" alt="">Recipes</h2>
         <div class="container-box">
             <ul class="yummly-search-results">
@@ -141,14 +144,15 @@
                 <button type="submit" id="continue" class="continuebtn">Continue</button>
             </div>
         </div>
-    </form>
+        <!--    </form>-->
+    </main>
 
 
 
 
     <!--   shopping list of ingredients-->
-
-    <form action="#" class="js-shoppinglist-form">
+    <main class="js-shoppinglist-page">
+        <!--    <form action="#" class="js-shoppinglist-form">-->
         <h2><img src="images/logo.jpeg" class="logo" alt="">Shopping List</h2>
         <div class="container">
             <ul>
@@ -197,12 +201,12 @@
                 </li>
             </ul>
         </div>
-    </form>
-
+        <!--    </form>-->
+    </main>
 
     <!--footer-->
 
-    <footer align='center'>
+    <footer>
         <p>&copy;Diane Cho</p>
         <ul>
 

@@ -44,8 +44,15 @@ h2 {
 }
 
 
-form {
+main {
     border: 3px solid #f1f1f1;
+    display: block;
+    clear: both;
+    width: 70%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
 }
 
 
@@ -138,11 +145,12 @@ span.newuser {
     padding-left: 20px;
 }
 
-.yummly-search-results li {
-    width: 48%;
+.yummly-search-results li,
+.js-shoppinglist-form li {
+    width: 46%;
     display: inline-block;
-    margin-left: 5%;
-    margin-right: 10%;
+    margin-left: 1%;
+    margin-right: 1%;
     margin-top: 5rem;
     margin-bottom: 5rem;
     vertical-align: top;
@@ -170,6 +178,10 @@ span.newuser {
     grid-gap: 30px;
 }
 */
+
+footer {
+    text-align: center;
+}
 
 footer li {
     display: inline-block;
