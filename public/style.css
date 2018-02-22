@@ -65,8 +65,11 @@ input[type=password] {
     border: 1px solid #ccc;
 }
 
-.container1 {
+
+
+.newuser-box {
     padding: 12px 20px;
+    text-align: right;
 }
 
 button {
@@ -92,7 +95,7 @@ button:hover {
 }
 
 .addbtn {
-    margin-left: 1rem;
+    margin-left: 5rem;
     margin-top: 1rem;
 }
 
@@ -101,17 +104,21 @@ button:hover {
     margin-top: 2rem;
 }
 
-.button2 {
+.optionbutton1 {
     width: auto;
+    margin-left: auto;
+    margin-right: 15px;
     padding: 10px 18px;
     background-color: #f44336;
+    text-align: center;
 }
 
 .container {
     padding: 16px;
+    text-align: right;
 }
 
-.container1 button1 {
+.newuser-box button1 {
     padding: 16px;
     text-align: right;
 }
@@ -123,15 +130,12 @@ span.psw {
 }
 
 span.newuser {
-    float: right;
     padding-top: 16px;
     margin-left: 20px;
     text-shadow: 1px 1px grey;
 }
 
-.button1 {
-    list-style: none;
-}
+
 
 .yummly-search-results img {
     margin-top: 40px;
@@ -146,7 +150,7 @@ span.newuser {
 }
 
 .yummly-search-results li,
-.js-shoppinglist-form li {
+.js-shoppinglist-page li {
     width: 46%;
     display: inline-block;
     margin-left: 1%;
@@ -154,6 +158,31 @@ span.newuser {
     margin-top: 5rem;
     margin-bottom: 5rem;
     vertical-align: top;
+}
+
+.recipes,
+.ingredientslist {
+    border: 3px solid #f1f1f1;
+    margin-right: 1rem;
+    margin-left: 2rem;
+    max-height: 200px;
+    margin-top: 1rem;
+}
+
+
+.recipeslist,
+.ingredientslist {
+    max-height: 100px;
+    overflow-x: auto;
+
+}
+
+.recipeslist li,
+.ingredientslist li {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+
 }
 
 .recipetitle {
@@ -181,12 +210,14 @@ span.newuser {
 
 footer {
     text-align: center;
+    padding-top: 40px;
 }
 
 footer li {
     display: inline-block;
     text-decoration: none;
-    padding-top: 30px;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 footer li img {

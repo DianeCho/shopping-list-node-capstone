@@ -1,50 +1,65 @@
 $(document).ready(function () {
-    $('.js-login-form').hide();
+    //    when the page loads
+    $('.js-search-page').hide();
+    $('.js-ingredients-page').hide();
+    $('.js-shoppinglist-page').hide();
+    $('.js-login-page').hide();
+    $('.js-newuser-page').hide();
+
+    //button triggers
     $('.enter').click(function (event) {
         event.preventDefault();
-        $('.js-login-form').show();
+        $('.js-login-page').show();
         $('.js-main-page').hide();
     });
 
-    $('.js-newuser-form').hide();
+
     $('.newuser').click(function (event) {
         event.preventDefault();
-        $('.js-newuser-form').show();
-        $('.js-login-form').hide();
+        $('.js-newuser-page').show();
+        $('.js-login-page').hide();
     });
 
-    $('.js-newuser-form').hide();
+
     $('.registerbtn').click(function (event) {
         event.preventDefault();
-        $('.js-login-form').show();
-        $('.js-newuser-form').hide();
+        $('.js-login-page').show();
+        $('.js-newuser-page').hide();
     });
 
 
-    $('.js-login-form').hide();
+
     $('.login').click(function (event) {
         event.preventDefault();
-        $('.js-search-form').show();
-        $('.js-login-form').hide();
+        $('.js-search-page').show();
+        $('.js-login-page').hide();
     });
 
 
-    $('.js-login-form').hide();
+
     $('.searchbtn').click(function (event) {
         event.preventDefault();
-        $('.js-ingredients-form').show();
-        $('.js-search-form').hide();
+        $('.js-ingredients-page').show();
+        $('.js-search-page').hide();
     });
 
-    $('.js-ingredients-form').hide();
+
     $('.continuebtn').click(function (event) {
         event.preventDefault();
-        $('.js-shoppinglist-form').show();
-        $('.js-ingredients-form').hide();
+        $('.js-shoppinglist-page').show();
+        $('.js-ingredients-page').hide();
     });
 
+    $('#returnbtn').click(function (event) {
+        event.preventDefault();
+        $('.js-search-page').show();
+        $('.js-shoppinglist-page').hide();
+    });
 
-    $('.js-search-form').hide();
-    $('.js-ingredients-form').hide();
-    $('.js-shoppinglist-form').hide();
+    $('#print').click(function (event) {
+        event.preventDefault();
+        window.print();
+
+    });
+
 });
