@@ -21,6 +21,7 @@
     },
     "homepage": "https://github.com/DianeCho/shopping-list-node-capstone#readme",
     "dependencies": {
+        "bcrypt": "^0.8.7",
         "bcryptjs": "^2.3.0",
         "body-parser": "^1.15.2",
         "express": "^4.14.0",

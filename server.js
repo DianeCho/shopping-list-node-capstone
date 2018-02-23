@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 var config = require('./config');
 
 var recipe = require('./models/recipe');
+const User = require('./models/user');
 var list = require('./models/list');
 const bodyParser = require('body-parser');
 const app = express();
@@ -52,16 +53,16 @@ var getRecepiesFromYum = function (searchTerm) {
     unirest.get("http://api.yummly.com/v1/api/recipes?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324&q=" + searchTerm + '&maxResult=12')
         .header("Accept", "application/json")
         .end(function (result) {
-        // console.log(result.status, result.headers, result.body);
-        //success scenario
-        if (result.ok) {
-            emitter.emit('end', result.body);
-        }
-        //failure scenario
-        else {
-            emitter.emit('error', result.code);
-        }
-    });
+            // console.log(result.status, result.headers, result.body);
+            //success scenario
+            if (result.ok) {
+                emitter.emit('end', result.body);
+            }
+            //failure scenario
+            else {
+                emitter.emit('error', result.code);
+            }
+        });
 
     return emitter;
 };
@@ -73,19 +74,63 @@ var getSingleFromYum = function (recipeId) {
     unirest.get("http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324")
         .header("Accept", "application/json")
         .end(function (result) {
-        //console.log(result.status, result.headers, result.body);
-        //success scenario
-        if (result.ok) {
-            emitter.emit('end', result.body);
-        }
-        //failure scenario
-        else {
-            emitter.emit('error', result.code);
-        }
-    });
+            //console.log(result.status, result.headers, result.body);
+            //success scenario
+            if (result.ok) {
+                emitter.emit('end', result.body);
+            }
+            //failure scenario
+            else {
+                emitter.emit('error', result.code);
+            }
+        });
 
     return emitter;
 };
+
+
+// creating a new user
+app.post('/users/create', (req, res) => {
+    let fname = req.body.fname;
+    let lname = req.body.lname;
+    let email = req.body.email;
+    email = email.trim();
+    let password = req.body.password;
+    password = password.trim();
+    bcrypt.genSalt(10, (err, salt) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal server error'
+            });
+        }
+
+        bcrypt.hash(password, salt, (err, hash) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal server error'
+                });
+            }
+
+            User.create({
+                fname,
+                lname,
+                email,
+                password: hash,
+            }, (err, item) => {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'Internal Server Error'
+                    });
+                }
+                if (item) {
+                    console.log(`User \`${fname}\` created.`);
+                    return res.json(item);
+                }
+            });
+        });
+    });
+});
+
 
 
 //function to check the ingredient short list and the detailed ingredient list and store them in the shopping list collection
