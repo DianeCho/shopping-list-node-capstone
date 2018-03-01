@@ -1,3 +1,74 @@
+let loggedInUser = undefined;
+
+
+function buildRecipeList(dataOutput) {
+    //builds recipe html for user selection
+    //console.log(dataOutput);
+    var buildHtml = '';
+
+    $.each(dataOutput.matches,
+        function (key, value) {
+
+            //ours
+            buildHtml += '<li>';
+            buildHtml += '<div class="recipetitle">';
+            buildHtml += '<label for="title">' + value.recipeName + '</label>';
+            buildHtml += ' <a href="https://www.yummly.com/#recipe/ ' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
+            buildHtml += '<i class="fa fa-info-circle" aria-hidden="true"></i>';
+            buildHtml += '</a>';
+            buildHtml += '</div>';
+            buildHtml += '<img src="' + value.smallImageUrls[0] + '" class="recipe" alt="">';
+            buildHtml += '<div class="recipes">';
+            buildHtml += '<ul class="recipeslist">';
+            buildHtml += '<li>';
+            buildHtml += 'Rating: ' + value.rating;
+            buildHtml += '</li>';
+            buildHtml += '<li>';
+            buildHtml += 'Course: ' + value.attributes.course;
+            buildHtml += '</li>';
+            buildHtml += '<li class="title">';
+            buildHtml += 'Ingredients:';
+            buildHtml += '</li>';
+            buildHtml += '<li>';
+
+
+            buildHtml += '<ol class="ingredientBox">';
+            let shortList = "";
+            $.each(value.ingredients, function (subkey, subvalue) {
+
+                buildHtml += '<li>';
+                buildHtml += subvalue;
+                buildHtml += '</li>';
+
+                shortList += subvalue + ",";
+
+            });
+            buildHtml += '</ol>'
+
+            buildHtml += '</li>';
+            buildHtml += '<li>';
+            buildHtml += "<form class='storeToDb'>";
+            buildHtml += "<input type='hidden' class='storeToDbName' value='" + value.recipeName + "'>";
+            buildHtml += "<input type='hidden' class='storeToDbRating' value='" + value.rating + "'>";
+            buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
+            buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
+            buildHtml += "<input type='hidden' class='storeToShortList' value='" + shortList + "'>";
+
+            buildHtml += '<button class="selectButton" >Select Recipe</button>';
+
+            buildHtml += "</form>";
+
+            buildHtml += '</li>';
+            buildHtml += '</ul>';
+            buildHtml += '</div>';
+            buildHtml += '<button type="button" class="addbtn">Add to list</button>';
+            buildHtml += '</li>';
+            //    console.log(buildHtml);
+        });
+    $('.yummly-search-results').html(buildHtml);
+
+};
+
 $(document).ready(function () {
     //    when the page loads
     $('.js-search-page').hide();
@@ -67,16 +138,70 @@ $(document).on('submit', '.js-newuser-form', function (event) {
 
 
 $(document).on('click', '.login', function (event) {
-
     event.preventDefault();
-    $('.js-search-page').show();
-    $('.js-login-page').hide();
+    let email = $('#sign-in-username').val();
+    let password = $('#sign-in-password').val();
+
+    if ((!email) || (email.length < 1) || (email.indexOf(' ') > 0)) {
+        alert('Invalid username');
+    } else if ((!password) || (password.length < 1) || (password.indexOf(' ') > 0)) {
+        alert('Invalid password');
+    } else {
+        const unamePwObject = {
+            email: email,
+            password: password
+        };
+        $.ajax({
+                type: "POST",
+                url: "/users/signin",
+                dataType: 'json',
+                data: JSON.stringify(unamePwObject),
+                contentType: 'application/json'
+            })
+            .done(function (result) {
+                console.log(result);
+                loggedInUser = result.email;
+                // show the signout link in header as soon as user is signed in
+
+                $('.js-search-page').show();
+                $('.js-login-page').hide();
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Invalid username and password combination. Pleae check your username and password and try again.');
+            });
+    }
 });
 
 
 $(document).on('click', '.searchbtn', function (event) {
-
     event.preventDefault();
+
+    let searchString = $('.js-query').val();
+
+    if ((!searchString) || (searchString.length < 1)) {
+        alert('Invalid search string');
+    } else {
+
+        $.ajax({
+                type: "GET",
+                url: '/search-recipes/' + searchString,
+                dataType: 'json',
+            })
+            .done(function (dataOutput) {
+                console.log(dataOutput);
+                buildRecipeList(dataOutput);
+
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+    }
+
     $('.js-ingredients-page').show();
     $('.js-search-page').hide();
 });

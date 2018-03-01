@@ -22,7 +22,7 @@
     "homepage": "https://github.com/DianeCho/shopping-list-node-capstone#readme",
     "dependencies": {
         "bcrypt": "^0.8.7",
-        "bcryptjs": "^2.3.0",
+        "bcryptjs": "^2.4.3",
         "body-parser": "^1.15.2",
         "express": "^4.14.0",
         "mongodb": "^2.2.9",
@@ -35,6 +35,7 @@
     "devDependencies": {
         "chai": "^4.1.2",
         "chai-http": "^3.0.0",
-        "mocha": "^4.0.1"
+        "mocha": "^4.0.1",
+        "nodemon": "^1.15.1"
     }
 }

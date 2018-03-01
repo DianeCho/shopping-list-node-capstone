@@ -3,6 +3,7 @@ const morgan = require('morgan');
 var unirest = require('unirest');
 var events = require('events');
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 var config = require('./config');
 
 var recipe = require('./models/recipe');
@@ -129,6 +130,40 @@ app.post('/users/create', (req, res) => {
             });
         });
     });
+});
+
+app.post('/users/signin', function (req, res) {
+    User
+        .findOne({
+            email: req.body.email
+        }, function (err, items) {
+            if (err) {
+                return res.status(500).json({
+                    message: "Internal server error"
+                });
+            }
+            if (!items) {
+                // bad username
+                return res.status(401).json({
+                    message: "Not found!"
+                });
+            } else {
+                items.validatePassword(req.body.password, function (err, isValid) {
+                    if (err) {
+                        console.log('There was an error validating the password.');
+                    }
+                    if (!isValid) {
+                        return res.status(401).json({
+                            message: "Not found"
+                        });
+                    } else {
+                        var logInTime = new Date();
+                        console.log("User logged in: " + req.body.email + ' at ' + logInTime);
+                        return res.json(items);
+                    }
+                });
+            };
+        });
 });
 
 
