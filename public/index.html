@@ -3,7 +3,9 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="print.css" rel="stylesheet" media="print">
 </head>
 
 <body>
@@ -34,7 +36,7 @@
                 <input type="text" id="sign-in-username" placeholder="Enter Username" name="uname" value="john@domain.com" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" id="sign-in-password"  placeholder="Enter Password" name="psw" value="123" required>
+                <input type="password" id="sign-in-password" placeholder="Enter Password" name="psw" value="123" required>
                 <button type="submit" class="login">Login</button>
             </div>
 
@@ -114,6 +116,7 @@
             <div class="container">
                 <label for="query"></label>
                 <input value="" type="text" class="js-query" placeholder="Search Recipes Here">
+                <input value="" type="hidden" class="js-query-username" value="">
                 <button type="submit" id="findIt" class="searchbtn">Search</button>
             </div>
         </form>
@@ -125,57 +128,58 @@
         <h2><img src="images/logo.jpeg" class="logo" alt="">Recipes</h2>
         <div class="container-box">
             <ul class="yummly-search-results">
-                <li>
-                    <div class="recipetitle">
-                        <label for="title">Title of Recipes</label>
-                    </div>
-                    <img src="images/recipe.jpg" class="recipe" alt="">
-                    <div class="recipes">
-                        <ul class="recipeslist">
-                            <li>instructions</li>
-                            <li>instructions</li>
-                            <li>instructions</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="addbtn">Add to list</button>
-                </li>
+                <!--
+<li>
+    <div class="recipetitle">
+        <label for="title">Title of Recipes</label>
+    </div>
+    <img src="images/recipe.jpg" class="recipe" alt="">
+    <div class="recipes">
+        <ul class="recipeslist">
+            <li>instructions</li>
+            <li>instructions</li>
+            <li>instructions</li>
+        </ul>
+    </div>
+    <button type="button" class="addbtn">Add to list</button>
+</li>
 
-                <li>
-                    <div class="recipetitle">
-                        <label for="title">Title of Recipes</label>
-                    </div><img src="images/recipe.jpg" class="recipe" alt="">
-                    <div class="recipes">
-                        <ul class="recipeslist">
-                            <li>instructions</li>
-                            <li>instructions</li>
-                            <li>instructions</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="addbtn">Add to list</button></li>
-                <li>
-                    <div class="recipetitle">
-                        <label for="title">Title of Recipes</label>
-                    </div><img src="images/recipe.jpg" class="recipe" alt="">
-                    <div class="recipes">
-                        <ul class="recipeslist">
-                            <li>instructions</li>
-                            <li>instructions</li>
-                            <li>instructions</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="addbtn">Add to list</button></li>
-                <li>
-                    <div class="recipetitle">
-                        <label for="title">Title of Recipes</label>
-                    </div><img src="images/recipe.jpg" class="recipe" alt="">
-                    <div class="recipes">
-                        <ul class="recipeslist">
-                            <li>instructions</li>
-                            <li>instructions</li>
-                            <li>instructions</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="addbtn">Add to list</button></li>
+<li>
+    <div class="recipetitle">
+        <label for="title">Title of Recipes</label>
+    </div><img src="images/recipe.jpg" class="recipe" alt="">
+    <div class="recipes">
+        <ul class="recipeslist">
+            <li>instructions</li>
+            <li>instructions</li>
+            <li>instructions</li>
+        </ul>
+    </div>
+    <button type="button" class="addbtn">Add to list</button></li>
+<li>
+    <div class="recipetitle">
+        <label for="title">Title of Recipes</label>
+    </div><img src="images/recipe.jpg" class="recipe" alt="">
+    <div class="recipes">
+        <ul class="recipeslist">
+            <li>instructions</li>
+            <li>instructions</li>
+            <li>instructions</li>
+        </ul>
+    </div>
+    <button type="button" class="addbtn">Add to list</button></li>
+<li>
+    <div class="recipetitle">
+        <label for="title">Title of Recipes</label>
+    </div><img src="images/recipe.jpg" class="recipe" alt="">
+    <div class="recipes">
+        <ul class="recipeslist">
+            <li>instructions</li>
+            <li>instructions</li>
+            <li>instructions</li>
+        </ul>
+    </div>
+    <button type="button" class="addbtn">Add to list</button></li>-->
 
             </ul>
             <div class="container">
@@ -195,6 +199,7 @@
         <h2><img src="images/logo.jpeg" class="logo" alt="">Shopping List</h2>
         <div class="container">
             <ul>
+                <!--
                 <li>
                     <div class="ingredients-box">
                         <label for="ingredients">ingredients</label>
@@ -256,10 +261,12 @@
                         </ul>
                         <button type="button" class="deletebtn">Delete</button></div>
                 </li>
+-->
             </ul>
             <div class="container">
                 <label for="query"></label>
-                <input value="" type="text" class="js-query" placeholder="Add Ingredients">
+                <input value="" type="text" class="js-query-ingredient-name" placeholder="Add Ingredient">
+                <input value="" type="text" class="js-query-ingredient-qty" placeholder="Ingredient Quantity">
                 <button type="button" class='optionbutton1' id="addbutton">Add More Ingredients</button>
             </div>
 

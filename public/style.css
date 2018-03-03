@@ -95,7 +95,7 @@ button:hover {
 }
 
 .addbtn {
-    margin-left: 5rem;
+    margin-left: 4rem;
     margin-top: 1rem;
 }
 
@@ -165,29 +165,31 @@ span.newuser {
     border: 3px solid #f1f1f1;
     margin-right: 1rem;
     margin-left: 2rem;
-    max-height: 200px;
+    /*    max-height: 200px;*/
     margin-top: 1rem;
 }
 
 
 .recipeslist,
 .ingredientslist {
-    max-height: 100px;
-    overflow-x: auto;
+    /*
+    max-height: 150px;overflow-x: auto;
+*/
+    font-size: 15px;
 
 }
 
 .recipeslist li,
 .ingredientslist li {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-
+    display: inline-block;
+    margin: 4px;
 }
+
 
 .recipetitle {
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .container ul {

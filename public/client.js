@@ -1,7 +1,7 @@
 let loggedInUser = undefined;
 
 
-function buildRecipeList(dataOutput) {
+function buildRecipeList(dataOutput, username) {
     //builds recipe html for user selection
     //console.log(dataOutput);
     var buildHtml = '';
@@ -13,7 +13,7 @@ function buildRecipeList(dataOutput) {
             buildHtml += '<li>';
             buildHtml += '<div class="recipetitle">';
             buildHtml += '<label for="title">' + value.recipeName + '</label>';
-            buildHtml += ' <a href="https://www.yummly.com/#recipe/ ' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
+            buildHtml += '<a href="https://www.yummly.com/#recipe/ ' + value.id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">';
             buildHtml += '<i class="fa fa-info-circle" aria-hidden="true"></i>';
             buildHtml += '</a>';
             buildHtml += '</div>';
@@ -32,7 +32,7 @@ function buildRecipeList(dataOutput) {
             buildHtml += '<li>';
 
 
-            buildHtml += '<ol class="ingredientBox">';
+            //            buildHtml += '<ol class="ingredientBox">';
             let shortList = "";
             $.each(value.ingredients, function (subkey, subvalue) {
 
@@ -43,7 +43,7 @@ function buildRecipeList(dataOutput) {
                 shortList += subvalue + ",";
 
             });
-            buildHtml += '</ol>'
+            //            buildHtml += '</ol>'
 
             buildHtml += '</li>';
             buildHtml += '<li>';
@@ -53,8 +53,9 @@ function buildRecipeList(dataOutput) {
             buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
             buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
             buildHtml += "<input type='hidden' class='storeToShortList' value='" + shortList + "'>";
+            buildHtml += "<input type='hidden' class='storeToUserName' value='" + username + "'>";
 
-            buildHtml += '<button class="selectButton" >Select Recipe</button>';
+            //            buildHtml += '<button class="selectButton" >Select Recipe</button>';
 
             buildHtml += "</form>";
 
@@ -68,6 +69,8 @@ function buildRecipeList(dataOutput) {
     $('.yummly-search-results').html(buildHtml);
 
 };
+
+
 
 $(document).ready(function () {
     //    when the page loads
@@ -137,6 +140,7 @@ $(document).on('submit', '.js-newuser-form', function (event) {
 });
 
 
+
 $(document).on('click', '.login', function (event) {
     event.preventDefault();
     let email = $('#sign-in-username').val();
@@ -164,6 +168,7 @@ $(document).on('click', '.login', function (event) {
                 // show the signout link in header as soon as user is signed in
 
                 $('.js-search-page').show();
+                $('.js-query-username').val(result.email);
                 $('.js-login-page').hide();
             })
             .fail(function (jqXHR, error, errorThrown) {
@@ -180,6 +185,7 @@ $(document).on('click', '.searchbtn', function (event) {
     event.preventDefault();
 
     let searchString = $('.js-query').val();
+    let searchUserName = $('.js-query-username').val();
 
     if ((!searchString) || (searchString.length < 1)) {
         alert('Invalid search string');
@@ -192,7 +198,7 @@ $(document).on('click', '.searchbtn', function (event) {
             })
             .done(function (dataOutput) {
                 console.log(dataOutput);
-                buildRecipeList(dataOutput);
+                buildRecipeList(dataOutput, searchUserName);
 
             })
             .fail(function (jqXHR, error, errorThrown) {
@@ -206,9 +212,80 @@ $(document).on('click', '.searchbtn', function (event) {
     $('.js-search-page').hide();
 });
 
-$(document).on('click', '.continuebtn', function (event) {
 
+function buildShoppingList(result) {
+    //builds ingredient list for ingredients page
+    console.log(result);
+    let aggregateList = [];
+    let aggregateLower = '';
+    let currentIngredient = '';
+    let oldIngredient = '';
+    let ingredientHtml = '';
+    for (let e = 0; e < result.length; e++) {
+        if (result[e].ingredient !== undefined) {
+            var resultconvert = result[e].ingredient;
+            //console.log(resultconvert);
+            var resultLower = resultconvert.toLowerCase();
+            currentIngredient = resultLower;
+
+            if (currentIngredient !== oldIngredient) {
+                ingredientHtml += '<li>';
+                ingredientHtml += '<div class="ingredients-box">';
+                ingredientHtml += '<label for="ingredients">' + result[e].ingredient + '</label>';
+                ingredientHtml += '<ol class ="ingredientslist">';
+
+            }
+
+            ingredientHtml += '<li> ' + result[e].qty;
+            ingredientHtml += '<form class="deleteDb">';
+            ingredientHtml += '<input type="hidden" class = "deleteFromDB" value=' + result[e]._id + ">";
+
+            ingredientHtml += '<button class ="deletebtn" type="button">';
+            ingredientHtml += '<i class="fa fa-trash" aria-hidden="true"></i> ';
+            ingredientHtml += '</button>  ';
+            ingredientHtml += '</form> ';
+            ingredientHtml += '</li> ';
+            let a = e;
+            a++;
+            if (a < result.length) {
+                resultconvert = result[a].ingredient;
+                resultLower = resultconvert.toLowerCase();
+            }
+
+            //console.log(currentIngredient, oldIngredient);
+            if (currentIngredient !== resultLower) {
+                //console.log('!', currentIngredient, oldIngredient);
+                //console.log('!', currentIngredient, oldIngredient);
+                ingredientHtml += '</ol></div></li>';
+
+            }
+            oldIngredient = currentIngredient;
+        }
+        $('.js-shoppinglist-page .container ul').html(ingredientHtml);
+    }
+    //console.log('aggregate', aggregateList);
+    //build output
+};
+
+
+$(document).on('click', '.continuebtn', function (event) {
     event.preventDefault();
+
+    $.ajax({
+            method: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/retrieve-sList/',
+        })
+        .done(function (result) {
+            buildShoppingList(result);
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+
     $('.js-shoppinglist-page').show();
     $('.js-ingredients-page').hide();
 });
@@ -228,16 +305,138 @@ $(document).on('click', '#print', function (event) {
 });
 
 $(document).on('click', '.deletebtn', function (event) {
-
+    event.preventDefault();
     console.log('removed button');
+
+    $(this).closest('.ingredientslist li').hide();
+
+    var idValue = $(this).parent().find('.deleteFromDB').val();
+
+    //console.log(deleteObject);
+
+    console.log(idValue);
+    $.ajax({
+            method: 'DELETE',
+            dataType: 'json',
+            contentType: 'application/json',
+
+            url: '/delete/' + idValue,
+        })
+        .done(function (result) {
+
+
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
 });
 
-$(document).on('click', '.addbtn', function (event) {
 
+function addToMenu(recipeName, id, menu) {
+    //Populates Menu section of Search.html
+    var buildMenuHtml = '';
+    //buildMenuHtml += '<li><h3>' + $('#recipeDay').val() + '</h3></li>';
+    buildMenuHtml += '<li><a href="https://www.yummly.com/#recipe/' + id + '" target="_blank" alt="Link to Yummly Recipe" title="Link to Yummly Recipe">' + recipeName + ' </a></li>';
+    var dayId = '#' + $('#recipeDay').val();
+    $(dayId).append(buildMenuHtml);
+    //    menu += '<li><h3>' + dayId + '</h3></li>';
+    //    menu += buildMenuHtml;
+    //    console.log(menu);
+
+};
+$(document).on('click', '.addbtn', function (event) {
+    //Stores a recipe and the day selected to Mongo.
+    event.preventDefault();
     console.log('add recipes to list');
+    var recipeNameValue = $(this).parent().find('.storeToDbName').val();
+    var recipeRatingValue = $(this).parent().find('.storeToDbRating').val();
+    var recipeCourseValue = $(this).parent().find('.storeToDbCourse').val();
+    var recipeIdValue = $(this).parent().find('.storeToDbId').val();
+    //var recipeDayValue = $(this).parent().find('.storeToDay').val();
+    var recipeDayValue = $('#recipeDay').val();
+    var recipeStoreToShortList = $(this).parent().find('.storeToShortList').val();
+    var recipeUserName = $(this).parent().find('.storeToUserName').val();
+
+    var recipeObject = {
+        'name': recipeNameValue,
+        'rating': recipeRatingValue,
+        'course': recipeCourseValue,
+        'id': recipeIdValue,
+        'day': recipeDayValue,
+        'shortList': recipeStoreToShortList,
+        'username': recipeUserName,
+
+    };
+    //console.log(recipeObject);
+    $.ajax({
+            method: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(recipeObject),
+            url: '/add-recipe-db/',
+        })
+        .done(function (result) {
+            console.log(result);
+            alert("Added");
+            addToMenu(recipeObject.name, recipeObject.id);
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
 });
 
 $(document).on('click', '#addbutton', function (event) {
-
+    event.preventDefault();
     console.log('add more ingredients to shopping list');
+
+    let ingredientName = $('.js-query-ingredient-name').val();
+    let ingredientQty = $('.js-query-ingredient-qty').val();
+
+    if ((!ingredientName) || (ingredientName.length < 1)) {
+        alert('Invalid ingredient name');
+    } else if ((!ingredientQty) || (ingredientQty.length < 1)) {
+        alert('Invalid ingredient Quantity');
+    } else {
+
+        const newIngredientObject = {
+            ingredient: ingredientName,
+            qty: ingredientQty
+        };
+        // will assign a value to variable 'user' in signin step below
+        // AJAX call to send form data up to server/DB and create new user
+        $.ajax({
+                type: 'POST',
+                url: '/ingredients/create',
+                dataType: 'json',
+                data: JSON.stringify(newIngredientObject),
+                contentType: 'application/json'
+            })
+            .done(function (result) {
+                console.log(result);
+                alert('ingredients added');
+                $.ajax({
+                        method: 'GET',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        url: '/retrieve-sList/',
+                    })
+                    .done(function (result) {
+                        buildShoppingList(result);
+                    })
+                    .fail(function (jqXHR, error, errorThrown) {
+                        console.log(jqXHR);
+                        console.log(error);
+                        console.log(errorThrown);
+                    });
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+    }
 });

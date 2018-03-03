@@ -54,7 +54,7 @@ var getRecepiesFromYum = function (searchTerm) {
     unirest.get("http://api.yummly.com/v1/api/recipes?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324&q=" + searchTerm + '&maxResult=12')
         .header("Accept", "application/json")
         .end(function (result) {
-            // console.log(result.status, result.headers, result.body);
+            // //console.log(result.status, result.headers, result.body);
             //success scenario
             if (result.ok) {
                 emitter.emit('end', result.body);
@@ -124,7 +124,7 @@ app.post('/users/create', (req, res) => {
                     });
                 }
                 if (item) {
-                    console.log(`User \`${fname}\` created.`);
+                    //console.log(`User \`${fname}\` created.`);
                     return res.json(item);
                 }
             });
@@ -150,7 +150,7 @@ app.post('/users/signin', function (req, res) {
             } else {
                 items.validatePassword(req.body.password, function (err, isValid) {
                     if (err) {
-                        console.log('There was an error validating the password.');
+                        //console.log('There was an error validating the password.');
                     }
                     if (!isValid) {
                         return res.status(401).json({
@@ -158,7 +158,7 @@ app.post('/users/signin', function (req, res) {
                         });
                     } else {
                         var logInTime = new Date();
-                        console.log("User logged in: " + req.body.email + ' at ' + logInTime);
+                        //console.log("User logged in: " + req.body.email + ' at ' + logInTime);
                         return res.json(items);
                     }
                 });
@@ -201,7 +201,7 @@ function storeShoppingList(ingredientsShortList, ingredientsDetails) {
                             if (detailedIngredient.indexOf(shortIngredient) !== -1) {
 
                                 foundDetailedtIngredient++;
-                                console.log(i, shortIngredient, detailedIngredient);
+                                //console.log(i, shortIngredient, detailedIngredient);
                             }
                         }
                     }
@@ -221,7 +221,7 @@ function storeIngredient(shortList, qtyList) {
     //function takes two arrays from a recipe.  It ensure that the short list item is present in the qty item.  If so, it checks the shoppingList array to see if the shortlist item is present.  If so it adds the qty to the shortlist qty.
     //if its not present, it adds the shortlist item and qty to shopping list.
 
-    console.log(shortList, qtyList);
+    //console.log(shortList, qtyList);
     for (let x = 0; x < qtyList.length; x++) {
         if (shortList[x] !== undefined) {
             let shortListLower = shortList[x].toLowerCase();
@@ -233,13 +233,13 @@ function storeIngredient(shortList, qtyList) {
             if (found < 1) {
                 let qtylistLower = qtyList[x].toLowerCase();
 
-                //                console.log("line 159", shortListLower, qtylistLower);
+                //                //console.log("line 159", shortListLower, qtylistLower);
 
-                //                    console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+                //                    //console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
                 if ((shortList[x] == '') && (qtyList[x] == '') && (shortList[x] == undefined) && (qtyList[x] == undefined)) {
-                    console.log("inside if -->", listCounter);
+                    //console.log("inside if -->", listCounter);
                 } else {
-                    console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+                    //console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
                     list.create({
                         ingredient: shortList[x],
                         qty: qtyList[x]
@@ -248,21 +248,25 @@ function storeIngredient(shortList, qtyList) {
                     found = 1;
                 }
             }
-
-            //            listCounter++;
         }
-
-
-
-        //        listCounter = 0;
         found = 0;
-
     }
 }
 
+app.post('/ingredients/create', function (req, res) {
+    list.create({
+        ingredient: req.body.ingredient,
+        qty: req.body.qty,
 
-
-//console.log(shoppingList);
+    }, function (err, item) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.status(201).json(item);
+    });
+});
 
 //internal api end points
 
@@ -310,20 +314,19 @@ app.get('/retrieve-sList/', function (req, res) {
     list.find({}).sort({
         ingredient: 1
     }).exec(function (err, item) {
-        console.log(item);
+        //console.log(item);
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
             });
         }
-        console.log(item);
         //console.log(item);
         res.status(200).json(item);
     })
 })
 app.get('/retrieve-recipes/', function (req, res) {
     recipe.find(function (err, item) {
-        //        console.log(item);
+        //        //console.log(item);
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
@@ -338,12 +341,12 @@ app.post('/add-recipe-db/', function (req, res) {
 
 
     let aRecipe = getSingleFromYum(req.body.id);
-    console.log(aRecipe);
+    //    //console.log(aRecipe);
 
     //get the data from the first api call
     aRecipe.on('end', function (item) {
-        //        console.log(req.body.shortList.split(","));
-        //        console.log(item.ingredientLines);
+        //        //console.log(req.body.shortList.split(","));
+        //        //console.log(item.ingredientLines);
 
 
         storeIngredient(req.body.shortList.split(","), item.ingredientLines);
@@ -357,6 +360,7 @@ app.post('/add-recipe-db/', function (req, res) {
             id: req.body.id,
             day: req.body.day,
             shortList: req.body.shortList,
+            username: req.body.username,
             ingredients: JSON.stringify(item.ingredientLines)
 
         }, function (err, item) {
@@ -403,7 +407,7 @@ app.delete('/delete/:ingredientId', function (req, res) {
     });
 });
 app.delete('/deleterec/:id', function (req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     if (req.params.id = 'killAll') {
 
         list.remove({}, function (err, items) {
@@ -420,7 +424,7 @@ app.delete('/deleterec/:id', function (req, res) {
 });
 
 app.delete('/deletering/:id', function (req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     if (req.params.id = 'killAll') {
 
         recipe.remove({}, function (err, items) {
