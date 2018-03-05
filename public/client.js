@@ -20,10 +20,10 @@ function buildRecipeList(dataOutput, username) {
             buildHtml += '<img src="' + value.smallImageUrls[0] + '" class="recipe" alt="">';
             buildHtml += '<div class="recipes">';
             buildHtml += '<ul class="recipeslist">';
-            buildHtml += '<li>';
+            buildHtml += '<li class="rating">';
             buildHtml += 'Rating: ' + value.rating;
             buildHtml += '</li>';
-            buildHtml += '<li>';
+            buildHtml += '<li class="course">';
             buildHtml += 'Course: ' + value.attributes.course;
             buildHtml += '</li>';
             buildHtml += '<li class="title">';
@@ -82,11 +82,19 @@ $(document).ready(function () {
 });
 //button triggers
 
+$(document).on('click', '.signinlink', function (event) {
+    event.preventDefault();
+    $('.js-login-page').show();
+    $('.js-newuser-page').hide();
+});
+
+
 $(document).on('click', '.enter', function (event) {
     event.preventDefault();
     $('.js-login-page').show();
     $('.js-main-page').hide();
 });
+
 
 //trigger for the register form
 $(document).on('click', '.newuser', function (event) {
@@ -175,7 +183,7 @@ $(document).on('click', '.login', function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                alert('Invalid username and password combination. Pleae check your username and password and try again.');
+                alert('Invalid username and password combination. Please check your username and password and try again.');
             });
     }
 });
@@ -347,7 +355,7 @@ function addToMenu(recipeName, id, menu) {
 
 };
 $(document).on('click', '.addbtn', function (event) {
-    //Stores a recipe and the day selected to Mongo.
+    //Stores a recipe selected to Mongo.
     event.preventDefault();
     console.log('add recipes to list');
     var recipeNameValue = $(this).parent().find('.storeToDbName').val();
@@ -369,6 +377,7 @@ $(document).on('click', '.addbtn', function (event) {
         'username': recipeUserName,
 
     };
+
     //console.log(recipeObject);
     $.ajax({
             method: 'POST',

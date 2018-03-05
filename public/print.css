@@ -17,4 +17,9 @@
     footer {
         display: none!important;
     }
+    #optionbox,
+    .optionbutton,
+    .deleteDb {
+        display: none!important;
+    }
 }

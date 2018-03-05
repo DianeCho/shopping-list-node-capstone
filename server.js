@@ -1,3 +1,4 @@
+//import external resources
 const express = require('express');
 const morgan = require('morgan');
 var unirest = require('unirest');
@@ -5,11 +6,15 @@ var events = require('events');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 var config = require('./config');
+const bodyParser = require('body-parser');
 
+
+//connection mongoose schemas
 var recipe = require('./models/recipe');
 const User = require('./models/user');
 var list = require('./models/list');
-const bodyParser = require('body-parser');
+
+//creating app object, add multiple endpoints
 const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -34,10 +39,6 @@ var runServer = function (callback) {
         });
     });
 };
-
-
-
-
 if (require.main === module) {
     runServer(function (err) {
         if (err) {
@@ -46,8 +47,9 @@ if (require.main === module) {
     });
 };
 
-// external api function
 
+
+// external api function, connect to yummly api
 var getRecepiesFromYum = function (searchTerm) {
     var emitter = new events.EventEmitter();
     //console.log("inside getFromActive function");
@@ -67,6 +69,10 @@ var getRecepiesFromYum = function (searchTerm) {
 
     return emitter;
 };
+
+
+
+//get single recipes from yummly
 var getSingleFromYum = function (recipeId) {
     //console.log(recipeId);
     var emitter = new events.EventEmitter();
@@ -90,14 +96,26 @@ var getSingleFromYum = function (recipeId) {
 };
 
 
+
+//local api endpoints
+
+
 // creating a new user
 app.post('/users/create', (req, res) => {
+
+
+    //get first and last name as well as email and password from request
     let fname = req.body.fname;
     let lname = req.body.lname;
     let email = req.body.email;
-    email = email.trim();
     let password = req.body.password;
+
+
+    //exclude spaces from email and password
+    email = email.trim();
     password = password.trim();
+
+    //generate encrption key for password
     bcrypt.genSalt(10, (err, salt) => {
         if (err) {
             return res.status(500).json({
@@ -105,6 +123,7 @@ app.post('/users/create', (req, res) => {
             });
         }
 
+        //using encrytption key above encrpyt the password
         bcrypt.hash(password, salt, (err, hash) => {
             if (err) {
                 return res.status(500).json({
@@ -112,17 +131,22 @@ app.post('/users/create', (req, res) => {
                 });
             }
 
+            //with encrpted password add user to db
             User.create({
                 fname,
                 lname,
                 email,
                 password: hash,
             }, (err, item) => {
+
+                //if adding user to db return errors display it
                 if (err) {
                     return res.status(500).json({
                         message: 'Internal Server Error'
                     });
                 }
+
+                //if adding user to db is successful, then create
                 if (item) {
                     //console.log(`User \`${fname}\` created.`);
                     return res.json(item);
@@ -132,33 +156,55 @@ app.post('/users/create', (req, res) => {
     });
 });
 
+
+
+// api point to sign in users
 app.post('/users/signin', function (req, res) {
+
+    //search db for user with email provided
     User
         .findOne({
             email: req.body.email
         }, function (err, items) {
+
+
+            //if db connection does not work, show message
             if (err) {
                 return res.status(500).json({
                     message: "Internal server error"
                 });
             }
+
+
+            //if user not found return error
             if (!items) {
                 // bad username
                 return res.status(401).json({
                     message: "Not found!"
                 });
             } else {
+
+
+                //if user is found, validate password
                 items.validatePassword(req.body.password, function (err, isValid) {
+
+
+                    //if db connection does not work, show message
                     if (err) {
                         //console.log('There was an error validating the password.');
                     }
+
+
+                    //invalid password
                     if (!isValid) {
                         return res.status(401).json({
                             message: "Not found"
                         });
-                    } else {
-                        var logInTime = new Date();
-                        //console.log("User logged in: " + req.body.email + ' at ' + logInTime);
+                    }
+
+
+                    //login and password successful
+                    else {
                         return res.json(items);
                     }
                 });
@@ -168,60 +214,14 @@ app.post('/users/signin', function (req, res) {
 
 
 
-//function to check the ingredient short list and the detailed ingredient list and store them in the shopping list collection
-
-function storeShoppingList(ingredientsShortList, ingredientsDetails) {
-
-    //check if the input arrays are not empty
-    if ((ingredientsShortList.length != 0) && (ingredientsDetails.length != 0)) {
-        //loop the shortlist array
-
-
-        for (let i = 0; i < ingredientsShortList.length; i++) {
-            let foundDetailedtIngredient = 0;
-
-            //check if the short Ingredient name is not empty
-            if (ingredientsShortList[i] != "") {
-
-                //get one short Ingredient at a time
-                let shortIngredient = ingredientsShortList[i].toLowerCase();
-
-                //if the ingredient was not found yet
-                if (foundDetailedtIngredient == 0) {
-                    //for each one short Ingredient loop the ingredientsDetails
-                    for (let y = 0; y < ingredientsDetails.length; y++) {
-
-                        //check if the detailed Ingredient name is not empty
-                        if (ingredientsDetails[i] != "") {
-
-                            //get one detailed Ingredient at a time
-                            let detailedIngredient = ingredientsDetails[i].toLowerCase();
-
-                            //match the short Ingredient with the detailed Ingredient
-                            if (detailedIngredient.indexOf(shortIngredient) !== -1) {
-
-                                foundDetailedtIngredient++;
-                                //console.log(i, shortIngredient, detailedIngredient);
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-        //check for existing data in DB.
-        //No Start adding.
-        //Yes check if ingredientsShortList is present
-        //no Add ingredientsShortList and ingredientsDetails as object.
-        //yes add ingredientsDetails to existing object.
-    }
-}
+//function takes two arrays from a recipe.  It ensure that the short list item is present in the qty item.
+//If so, it checks the shoppingList array to see if the shortlist item is present.
+//If so it adds the qty to the shortlist qty.
+//if its not present, it adds the shortlist item and qty to shopping list.
 
 function storeIngredient(shortList, qtyList) {
-    //function takes two arrays from a recipe.  It ensure that the short list item is present in the qty item.  If so, it checks the shoppingList array to see if the shortlist item is present.  If so it adds the qty to the shortlist qty.
-    //if its not present, it adds the shortlist item and qty to shopping list.
 
-    //console.log(shortList, qtyList);
+    //looping through qtylist array
     for (let x = 0; x < qtyList.length; x++) {
         if (shortList[x] !== undefined) {
             let shortListLower = shortList[x].toLowerCase();
@@ -229,17 +229,21 @@ function storeIngredient(shortList, qtyList) {
         //        let listCounter = 0;
         let found = 0;
 
+
+        //loops through qtylist array in order to match to short list array
         for (let listCounter = 0; listCounter < qtyList.length; listCounter++) {
             if (found < 1) {
                 let qtylistLower = qtyList[x].toLowerCase();
 
-                //                //console.log("line 159", shortListLower, qtylistLower);
-
-                //                    //console.log("outside -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+                //if no match do nothing
                 if ((shortList[x] == '') && (qtyList[x] == '') && (shortList[x] == undefined) && (qtyList[x] == undefined)) {
                     //console.log("inside if -->", listCounter);
-                } else {
-                    //console.log("inside else -->", listCounter, " <--> ", shortList[x], " <--> ", qtyList[x]);
+                }
+
+                //if there is match...
+                else {
+
+                    //add match to db
                     list.create({
                         ingredient: shortList[x],
                         qty: qtyList[x]
@@ -253,6 +257,9 @@ function storeIngredient(shortList, qtyList) {
     }
 }
 
+
+
+//create ingredients api endpoint
 app.post('/ingredients/create', function (req, res) {
     list.create({
         ingredient: req.body.ingredient,
@@ -268,8 +275,25 @@ app.post('/ingredients/create', function (req, res) {
     });
 });
 
-//internal api end points
 
+
+//get all recipes api endpoint
+app.get('/retrieve-recipes/', function (req, res) {
+    recipe.find(function (err, item) {
+        //        //console.log(item);
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.status(200).json(item);
+    });
+});
+
+
+
+
+//search recipes by name api endpoint
 app.get('/search-recipes/:name', (req, res) => {
     //console.log(req);
     //    external api function call and response
@@ -289,6 +313,7 @@ app.get('/search-recipes/:name', (req, res) => {
 });
 
 
+//search recipes by ID api endpoint
 app.get('/get-recipe/:id', (req, res) => {
 
     //console.log(req.params.id);
@@ -310,6 +335,9 @@ app.get('/get-recipe/:id', (req, res) => {
     });
 
 });
+
+
+//get shortlist api endpoint
 app.get('/retrieve-sList/', function (req, res) {
     list.find({}).sort({
         ingredient: 1
@@ -324,19 +352,10 @@ app.get('/retrieve-sList/', function (req, res) {
         res.status(200).json(item);
     })
 })
-app.get('/retrieve-recipes/', function (req, res) {
-    recipe.find(function (err, item) {
-        //        //console.log(item);
-        if (err) {
-            return res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        }
-        res.status(200).json(item);
-    });
-});
 
 
+
+//add recipe api endpoint to db
 app.post('/add-recipe-db/', function (req, res) {
 
 
@@ -350,7 +369,6 @@ app.post('/add-recipe-db/', function (req, res) {
 
 
         storeIngredient(req.body.shortList.split(","), item.ingredientLines);
-        //ttstoreShoppingList(req.body.shortList.split(","), item.ingredientLines);
         //console.log(item.ingredientLines);
         //db connection and data queries
         recipe.create({
@@ -395,6 +413,10 @@ app.post('/add-recipe-db/', function (req, res) {
 
 
 });
+
+
+
+//delete ingredient api endpoint by id
 app.delete('/delete/:ingredientId', function (req, res) {
     //console.log(req.params.id);
     list.findByIdAndRemove(req.params.ingredientId, function (err, items) {
@@ -406,6 +428,10 @@ app.delete('/delete/:ingredientId', function (req, res) {
         res.status(201).json(items);
     });
 });
+
+
+
+//delete recipe api endpoint by id
 app.delete('/deleterec/:id', function (req, res) {
     //console.log(req.params.id);
     if (req.params.id = 'killAll') {
@@ -423,6 +449,9 @@ app.delete('/deleterec/:id', function (req, res) {
     };
 });
 
+
+
+//delete all recipes
 app.delete('/deletering/:id', function (req, res) {
     //console.log(req.params.id);
     if (req.params.id = 'killAll') {

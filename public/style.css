@@ -53,6 +53,8 @@ main {
     margin-left: auto;
     margin-right: auto;
     padding: 1rem;
+    padding-bottom: 5rem;
+    margin-top: 10rem;
 }
 
 
@@ -86,6 +88,12 @@ button:hover {
     opacity: 0.8;
 }
 
+.fa-info-circle:before {
+    content: "\f05a";
+    color: ghostwhite;
+    opacity: 0.8;
+}
+
 .cancelbtn,
 .deletebtn,
 .addbtn {
@@ -99,9 +107,9 @@ button:hover {
     margin-top: 1rem;
 }
 
-.deletebtn {
-    margin-left: 1rem;
-    margin-top: 2rem;
+
+.deleteDB {
+    display: block;
 }
 
 .optionbutton1 {
@@ -111,6 +119,10 @@ button:hover {
     padding: 10px 18px;
     background-color: #f44336;
     text-align: center;
+}
+
+.optionbutton {
+    margin-left: 1rem;
 }
 
 .container {
@@ -149,9 +161,9 @@ span.newuser {
     padding-left: 20px;
 }
 
-.yummly-search-results li,
+
 .js-shoppinglist-page li {
-    width: 46%;
+    width: 47%;
     display: inline-block;
     margin-left: 1%;
     margin-right: 1%;
@@ -160,23 +172,38 @@ span.newuser {
     vertical-align: top;
 }
 
+.yummly-search-results li {
+    width: 47%;
+    display: inline-block;
+    margin-left: 2%;
+    margin-right: 1%;
+    margin-top: 7rem;
+    margin-bottom: 2rem;
+    vertical-align: top;
+}
+
 .recipes,
 .ingredientslist {
     border: 3px solid #f1f1f1;
-    margin-right: 1rem;
-    margin-left: 2rem;
+    /*    margin-right: 1rem;*/
+    /*    margin-left: 2rem;*/
     /*    max-height: 200px;*/
     margin-top: 1rem;
+}
+
+.title,
+.rating,
+.course {
+    text-decoration: underline;
 }
 
 
 .recipeslist,
 .ingredientslist {
-    /*
-    max-height: 150px;overflow-x: auto;
-*/
+    max-height: 150px;
+    overflow-x: auto;
     font-size: 15px;
-
+    background: linear-gradient(to right, rgba(20, 20, 20, 0.08), rgb(20, 20, 20));
 }
 
 .recipeslist li,
@@ -186,18 +213,32 @@ span.newuser {
     margin: 4px;
 }
 
+.ingredientslist li {
+    text-align: center;
+    display: inline-block;
+    width: 46%;
+}
+
 
 .recipetitle {
     text-align: center;
     font-size: 20px;
 }
 
+label {
+    text-transform: uppercase;
+}
+
 .container ul {
     list-style: none;
+    margin-bottom: 5rem;
 }
 
 .ingredients-box {
     text-align: center;
+    padding: 25px;
+    width: 107%;
+    margin-bottom: -10rem;
 }
 
 
