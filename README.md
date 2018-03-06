@@ -29,12 +29,16 @@ The purpose of this app is to find a recipe using Yummly's API to retrieve delic
 ![Landing page screen shot](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/pic5.png)
 
 ## Screenshots
-![Landing page screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/cap1.png)
-![Account setup screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/cap2.png)
-![User homepage screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/cap3.png)
-![Achievement timeline screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/cap4.png)
-![Skills word cloud screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/cap5.png)
-![Skills word cloud screen shot](https://github.com/terrylthompsonintx/shopping-list-full-stack-capstone/blob/master/github-images/cap6.png)
+![Landing page screen shot](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/Screenshot1.png)
+![Login page](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/Screenshot2.png)
+![Register new user](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/Screenshot3.png)
+![Search recipes](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/Screenshot4.png)
+![Displays list of recipes](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/Screenshot5.png)
+![Displays list of recipes](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/Screenshot6.png)
+![Displays added list of ingredients from recipes](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/Screenshot7.png)
+![Displays added list of ingredients from recipes](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/Screenshot8.png)
+![Print page](https://github.com/DianeCho/shopping-list-node-capstone/blob/master/github-images/Screenshot9.png)
+
 ## Working Prototype
 Find a working prototype with Node at https://shopping-list-capstone.herokuapp.com/ .
 
