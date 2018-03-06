@@ -10,12 +10,18 @@
 
 <body>
 
+    <div id="messageBox" class="demoMessage">
+        <span>Loading ...</span>
+        <!--            <button id="hideBtn">X</button>-->
+    </div>
+
+
     <!--   main page explaining about the app -->
 
     <main id='intro' class='js-main-page'>
         <h1><img src="images/logo.jpeg" class="logo" alt="">Find Delicious Recipes Easily!</h1>
-        <p>Search, Print & GO!</p>
-        <ol type="1">
+        <p class="heading">Search, Print & GO!</p>
+        <ol class="instructions">
             <li>Search for delicious recipes.</li>
             <li>Select recipes or save to favorites</li>
             <li>Create a shopping list for the recipes.</li>
@@ -42,7 +48,7 @@
 
             <div class="newuser-box">
                 <!--           <button type="button" class="cancelbtn">Cancel</button>-->
-                <span class="newuser">Register as <a href="#">new user?</a></span>
+                <span class="newuser">Register as <a href="#" class="newuserlink">new user?</a></span>
                 <!--            <span class="psw">Forgot <a href="#">password?</a></span>-->
             </div>
         </form>
@@ -271,8 +277,8 @@
             </div>
 
             <div class="optionbutton">
-                <button type="button" class='optionbutton1' id="returnbtn">Return to Search</button>
                 <button type="button" class='optionbutton1' id="print">Print</button>
+                <button type="button" class='optionbutton1' id="returnbtn">Return to Search</button>
             </div>
 
         </div>
@@ -282,7 +288,7 @@
     <!--footer-->
 
     <footer>
-        <p>&copy;Diane Cho</p>
+        <p>&copy;2018 Diane Cho</p>
         <ul>
 
             <li>

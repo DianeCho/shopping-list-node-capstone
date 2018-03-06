@@ -18,8 +18,35 @@ body {
     color: ghostwhite;
 }
 
-.button1 {
-    text-align: right;
+.demoMessage {
+    position: fixed;
+    top: 0px;
+    left: 40%;
+    background-color: #116466;
+    color: #fff;
+    padding: 10px 5%;
+    width: 30%;
+    text-align: center;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.demoMessage span,
+.demoMessage a {
+    color: #fff;
+
+}
+
+.demoMessage a {
+    cursor: pointer;
+    color: yellow;
+}
+
+.demoMessage #hideBtn {
+    padding: 2px 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 
@@ -30,6 +57,8 @@ h2 {
     padding: 2rem;
     color: white;
 }
+
+
 
 .logo {
     height: 50px;
@@ -55,6 +84,17 @@ main {
     padding: 1rem;
     padding-bottom: 5rem;
     margin-top: 10rem;
+}
+
+.heading {
+    font-size: 30px;
+}
+
+.instructions {
+    list-style-type: upper-latin;
+    text-align: left;
+    font-size: 20px;
+    margin-left: 30%;
 }
 
 
@@ -84,6 +124,10 @@ button {
     width: 100%;
 }
 
+#returnbtn {
+    background-color: #f44336;
+}
+
 button:hover {
     opacity: 0.8;
 }
@@ -92,6 +136,7 @@ button:hover {
     content: "\f05a";
     color: ghostwhite;
     opacity: 0.8;
+    margin-left: 1rem;
 }
 
 .cancelbtn,
@@ -112,14 +157,6 @@ button:hover {
     display: block;
 }
 
-.optionbutton1 {
-    width: auto;
-    margin-left: auto;
-    margin-right: 15px;
-    padding: 10px 18px;
-    background-color: #f44336;
-    text-align: center;
-}
 
 .optionbutton {
     margin-left: 1rem;
@@ -147,18 +184,9 @@ span.newuser {
     text-shadow: 1px 1px grey;
 }
 
-
-
-.yummly-search-results img {
-    margin-top: 40px;
-    display: block;
-    width: 100%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    list-style-type: none;
-    padding-right: 10px;
-    padding-left: 20px;
+.newuserlink,
+.signinlink {
+    color: ghostwhite;
 }
 
 
@@ -172,6 +200,21 @@ span.newuser {
     vertical-align: top;
 }
 
+.yummly-search-results img {
+    margin-top: 40px;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    padding-right: 10px;
+    padding-left: 20px;
+    border-radius: 90px;
+    margin-bottom: 60px;
+}
+
+
 .yummly-search-results li {
     width: 47%;
     display: inline-block;
@@ -180,24 +223,23 @@ span.newuser {
     margin-top: 7rem;
     margin-bottom: 2rem;
     vertical-align: top;
+    border: 3px solid #f1f1f1;
+    background: linear-gradient(to right, rgba(20, 20, 20, 0.08), rgb(20, 20, 20));
 }
 
+
+/*
 .recipes,
 .ingredientslist {
     border: 3px solid #f1f1f1;
-    /*    margin-right: 1rem;*/
-    /*    margin-left: 2rem;*/
-    /*    max-height: 200px;*/
     margin-top: 1rem;
+margin-right: 1rem;
+margin-left: 2rem;
+ max-height: 200px;
 }
+*/
 
-.title,
-.rating,
-.course {
-    text-decoration: underline;
-}
-
-
+/*
 .recipeslist,
 .ingredientslist {
     max-height: 150px;
@@ -205,12 +247,23 @@ span.newuser {
     font-size: 15px;
     background: linear-gradient(to right, rgba(20, 20, 20, 0.08), rgb(20, 20, 20));
 }
+*/
+
+/*
+.title,
+.rating,
+.course {
+    text-decoration: underline;
+}
+*/
 
 .recipeslist li,
 .ingredientslist li {
     text-align: center;
     display: inline-block;
     margin: 4px;
+    text-decoration: none;
+    border: none;
 }
 
 .ingredientslist li {
@@ -254,6 +307,7 @@ label {
 footer {
     text-align: center;
     padding-top: 40px;
+    margin-top: 25%;
 }
 
 footer li {
@@ -267,6 +321,7 @@ footer li img {
     width: auto;
     max-height: 30px;
     border-radius: 5px;
+    padding-left: 9px;
 }
 
 

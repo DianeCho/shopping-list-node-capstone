@@ -429,6 +429,57 @@ app.delete('/delete/:ingredientId', function (req, res) {
     });
 });
 
+//delete ingredients wihtout quantity api endpoint
+app.delete('/delete-empty-ingredients/', function (req, res) {
+    console.log("inside delete-empty-ingredients");
+    //find ingredients without the "qty" field
+
+
+    list
+        .find({
+            qty: {
+                $exists: false
+            }
+        }).exec().then(function (items) {
+            return res.status(204).end();
+        }).catch(function (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
+
+    //                    list.find({
+    //                        qty: {
+    //                            $exists: false
+    //                        },
+    //        function (err, items) {
+    //            console.log(items);
+    //            //            // if the there is an error searching show it
+    //            //            if (err) {
+    //            //                return res.status(404).json({
+    //            //                    message: 'Item not found.'
+    //            //                })
+    //            //            }
+    //            //            //otherwise get the id of the empty ingredients
+    //            //            else if (items) {
+    //            //                //and remove them from the db
+    //            //                list.findByIdAndRemove(items._id, function (err, items) {
+    //            //                    if (err)
+    //            //                        return res.status(404).json({
+    //            //                            message: 'Item not found.'
+    //            //                        });
+    //            //
+    //            //                    res.status(201);
+    //            //                });
+    //            //            } else {
+    //            //                return res.status(404).json({
+    //            //                    message: 'Item not found.'
+    //            //                });
+    //            //            }
+    //        }
+    //    }).remove();
+});
+
 
 
 //delete recipe api endpoint by id

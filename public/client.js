@@ -1,6 +1,12 @@
 let loggedInUser = undefined;
 
 
+function displayError(message) {
+    $("#messageBox span").html(message);
+    $("#messageBox").fadeIn();
+    $("#messageBox").fadeOut(10000);
+};
+
 function buildRecipeList(dataOutput, username) {
     //builds recipe html for user selection
     //console.log(dataOutput);
@@ -29,14 +35,14 @@ function buildRecipeList(dataOutput, username) {
             buildHtml += '<li class="title">';
             buildHtml += 'Ingredients:';
             buildHtml += '</li>';
-            buildHtml += '<li>';
+            //            buildHtml += '<li>';
 
 
             //            buildHtml += '<ol class="ingredientBox">';
             let shortList = "";
             $.each(value.ingredients, function (subkey, subvalue) {
 
-                buildHtml += '<li>';
+                buildHtml += '<li class="ingredientlistfromrecipe">';
                 buildHtml += subvalue;
                 buildHtml += '</li>';
 
@@ -45,16 +51,15 @@ function buildRecipeList(dataOutput, username) {
             });
             //            buildHtml += '</ol>'
 
-            buildHtml += '</li>';
-            buildHtml += '<li>';
-            buildHtml += "<form class='storeToDb'>";
-            buildHtml += "<input type='hidden' class='storeToDbName' value='" + value.recipeName + "'>";
-            buildHtml += "<input type='hidden' class='storeToDbRating' value='" + value.rating + "'>";
-            buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
-            buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
-            buildHtml += "<input type='hidden' class='storeToShortList' value='" + shortList + "'>";
-            buildHtml += "<input type='hidden' class='storeToUserName' value='" + username + "'>";
-
+            //            buildHtml += '</li>';
+            //            buildHtml += '<li>';
+            //            buildHtml += "<form class='storeToDb'>";
+            //            buildHtml += "<input type='hidden' class='storeToDbName' value='" + value.recipeName + "'>";
+            //            buildHtml += "<input type='hidden' class='storeToDbRating' value='" + value.rating + "'>";
+            //            buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
+            //            buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
+            //            buildHtml += "<input type='hidden' class='storeToShortList' value='" + shortList + "'>";
+            //            buildHtml += "<input type='hidden' class='storeToUserName' value='" + username + "'>";
             //            buildHtml += '<button class="selectButton" >Select Recipe</button>';
 
             buildHtml += "</form>";
@@ -79,6 +84,7 @@ $(document).ready(function () {
     $('.js-shoppinglist-page').hide();
     $('.js-login-page').hide();
     $('.js-newuser-page').hide();
+    $("#messageBox").hide();
 });
 //button triggers
 
@@ -114,9 +120,9 @@ $(document).on('submit', '.js-newuser-form', function (event) {
     let confirmPw = $('#cpassword').val();
     console.log(fname, lname, email, pw, confirmPw);
     if (email == "") {
-        alert('Please add an email');
+        displayError('Please add an email');
     } else if (pw !== confirmPw) {
-        alert('Passwords must match!');
+        displayError('Passwords must match!');
     } else {
         const newUserObject = {
             fname: fname,
@@ -135,7 +141,7 @@ $(document).on('submit', '.js-newuser-form', function (event) {
             })
             .done(function (result) {
                 console.log(result);
-                alert('Thanks for signing up! You may now sign in with your username and password.');
+                displayError('Thanks for signing up! You may now sign in with your username and password.');
                 $('.js-login-page').show();
                 $('.js-newuser-page').hide();
             })
@@ -155,9 +161,9 @@ $(document).on('click', '.login', function (event) {
     let password = $('#sign-in-password').val();
 
     if ((!email) || (email.length < 1) || (email.indexOf(' ') > 0)) {
-        alert('Invalid username');
+        displayError('Invalid username');
     } else if ((!password) || (password.length < 1) || (password.indexOf(' ') > 0)) {
-        alert('Invalid password');
+        displayError('Invalid password');
     } else {
         const unamePwObject = {
             email: email,
@@ -183,7 +189,7 @@ $(document).on('click', '.login', function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                alert('Invalid username and password combination. Please check your username and password and try again.');
+                displayError('Invalid username and password combination. Please check your username and password and try again.');
             });
     }
 });
@@ -196,7 +202,7 @@ $(document).on('click', '.searchbtn', function (event) {
     let searchUserName = $('.js-query-username').val();
 
     if ((!searchString) || (searchString.length < 1)) {
-        alert('Invalid search string');
+        displayError('Invalid search string');
     } else {
 
         $.ajax({
@@ -331,7 +337,22 @@ $(document).on('click', '.deletebtn', function (event) {
             url: '/delete/' + idValue,
         })
         .done(function (result) {
-
+            displayError("Deleted");
+            //if the last quantity of an ingredient is deleted delete the parent ingredient too
+            $.ajax({
+                    method: 'DELETE',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '/delete-empty-ingredients/'
+                })
+                .done(function (result) {
+                    alert("parent ingredient deleted");
+                })
+                .fail(function (jqXHR, error, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(error);
+                    console.log(errorThrown);
+                });
 
         })
         .fail(function (jqXHR, error, errorThrown) {
@@ -388,7 +409,7 @@ $(document).on('click', '.addbtn', function (event) {
         })
         .done(function (result) {
             console.log(result);
-            alert("Added");
+            displayError("Added to list");
             addToMenu(recipeObject.name, recipeObject.id);
         })
         .fail(function (jqXHR, error, errorThrown) {
@@ -406,9 +427,9 @@ $(document).on('click', '#addbutton', function (event) {
     let ingredientQty = $('.js-query-ingredient-qty').val();
 
     if ((!ingredientName) || (ingredientName.length < 1)) {
-        alert('Invalid ingredient name');
+        displayError('Invalid ingredient name');
     } else if ((!ingredientQty) || (ingredientQty.length < 1)) {
-        alert('Invalid ingredient Quantity');
+        displayError('Invalid ingredient Quantity');
     } else {
 
         const newIngredientObject = {
@@ -426,7 +447,7 @@ $(document).on('click', '#addbutton', function (event) {
             })
             .done(function (result) {
                 console.log(result);
-                alert('ingredients added');
+                displayError('Ingredients added');
                 $.ajax({
                         method: 'GET',
                         dataType: 'json',
