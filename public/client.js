@@ -311,6 +311,13 @@ $(document).on('click', '#returnbtn', function (event) {
     $('.js-shoppinglist-page').hide();
 });
 
+$(document).on('click', '#returnmain', function (event) {
+
+    event.preventDefault();
+    $('.js-main-page').show();
+    $('.js-shoppinglist-page').hide();
+});
+
 $(document).on('click', '#print', function (event) {
 
     event.preventDefault();
@@ -361,7 +368,6 @@ $(document).on('click', '.deletebtn', function (event) {
             console.log(errorThrown);
         });
 });
-
 
 function addToMenu(recipeName, id, menu) {
     //Populates Menu section of Search.html
