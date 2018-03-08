@@ -74,7 +74,7 @@ var getRecepiesFromYum = function (searchTerm) {
 
 //get single recipes from yummly
 var getSingleFromYum = function (recipeId) {
-    //console.log(recipeId);
+    console.log(recipeId);
     var emitter = new events.EventEmitter();
     //console.log("inside getFromActive function");
     //console.log("http://api.yummly.com/v1/api/recipe/" + recipeId + "?_app_id=35372e2c&_app_key=971c769d4bab882dc3281f0dc6131324");
@@ -394,11 +394,11 @@ app.post('/add-recipe-db/', function (req, res) {
             ingredients: JSON.stringify(item.ingredientLines)
 
         }, function (err, item) {
-            //            if (err) {
-            //                return res.status(500).json({
-            //                    message: 'Internal Server Error'
-            //                });
-            //            }
+            if (err) {
+                return res.status(500).json({
+                    message: 'Internal Server Error'
+                });
+            }
             //            res.status(201).json(item);
         });
 
@@ -408,6 +408,7 @@ app.post('/add-recipe-db/', function (req, res) {
 
     //error handling
     aRecipe.on('error', function (code) {
+        console.log('getSingleFromYum from api not working');
         res.sendStatus(code);
     });
 
@@ -431,53 +432,21 @@ app.delete('/delete/:ingredientId', function (req, res) {
 
 //delete ingredients wihtout quantity api endpoint
 app.delete('/delete-empty-ingredients/', function (req, res) {
-    console.log("inside delete-empty-ingredients");
-    //find ingredients without the "qty" field
-
-
+    //find ingredients without the "qty" field and remove them
     list
         .find({
             qty: {
                 $exists: false
             }
-        }).exec().then(function (items) {
-            return res.status(204).end();
+        }).remove().exec().then(function (items) {
+            return res.status(204).json({
+                message: 'removed'
+            }).end();
         }).catch(function (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
             });
         });
-
-    //                    list.find({
-    //                        qty: {
-    //                            $exists: false
-    //                        },
-    //        function (err, items) {
-    //            console.log(items);
-    //            //            // if the there is an error searching show it
-    //            //            if (err) {
-    //            //                return res.status(404).json({
-    //            //                    message: 'Item not found.'
-    //            //                })
-    //            //            }
-    //            //            //otherwise get the id of the empty ingredients
-    //            //            else if (items) {
-    //            //                //and remove them from the db
-    //            //                list.findByIdAndRemove(items._id, function (err, items) {
-    //            //                    if (err)
-    //            //                        return res.status(404).json({
-    //            //                            message: 'Item not found.'
-    //            //                        });
-    //            //
-    //            //                    res.status(201);
-    //            //                });
-    //            //            } else {
-    //            //                return res.status(404).json({
-    //            //                    message: 'Item not found.'
-    //            //                });
-    //            //            }
-    //        }
-    //    }).remove();
 });
 
 

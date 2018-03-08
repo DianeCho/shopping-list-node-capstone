@@ -35,10 +35,10 @@ function buildRecipeList(dataOutput, username) {
             buildHtml += '<li class="title">';
             buildHtml += 'Ingredients:';
             buildHtml += '</li>';
-            //            buildHtml += '<li>';
+            buildHtml += '<li>';
 
 
-            //            buildHtml += '<ol class="ingredientBox">';
+            buildHtml += '<ol class="ingredientBox">';
             let shortList = "";
             $.each(value.ingredients, function (subkey, subvalue) {
 
@@ -49,25 +49,24 @@ function buildRecipeList(dataOutput, username) {
                 shortList += subvalue + ",";
 
             });
-            //            buildHtml += '</ol>'
+            buildHtml += '</ol>'
 
-            //            buildHtml += '</li>';
-            //            buildHtml += '<li>';
-            //            buildHtml += "<form class='storeToDb'>";
-            //            buildHtml += "<input type='hidden' class='storeToDbName' value='" + value.recipeName + "'>";
-            //            buildHtml += "<input type='hidden' class='storeToDbRating' value='" + value.rating + "'>";
-            //            buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
-            //            buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
-            //            buildHtml += "<input type='hidden' class='storeToShortList' value='" + shortList + "'>";
-            //            buildHtml += "<input type='hidden' class='storeToUserName' value='" + username + "'>";
-            //            buildHtml += '<button class="selectButton" >Select Recipe</button>';
-
+            buildHtml += '</li>';
+            buildHtml += '<li>';
+            buildHtml += "<form class='storeToDb'>";
+            buildHtml += "<input type='hidden' class='storeToDbName' value='" + value.recipeName + "'>";
+            buildHtml += "<input type='hidden' class='storeToDbRating' value='" + value.rating + "'>";
+            buildHtml += "<input type='hidden' class='storeToDbCourse' value='" + value.attributes.course + "'>";
+            buildHtml += "<input type='hidden' class='storeToDbId' value='" + value.id + "'>";
+            buildHtml += "<input type='hidden' class='storeToShortList' value='" + shortList + "'>";
+            buildHtml += "<input type='hidden' class='storeToUserName' value='" + username + "'>";
+            buildHtml += '<button type="button" class="addbtn">Add to list</button>';
             buildHtml += "</form>";
 
             buildHtml += '</li>';
             buildHtml += '</ul>';
             buildHtml += '</div>';
-            buildHtml += '<button type="button" class="addbtn">Add to list</button>';
+
             buildHtml += '</li>';
             //    console.log(buildHtml);
         });
@@ -243,7 +242,7 @@ function buildShoppingList(result) {
             currentIngredient = resultLower;
 
             if (currentIngredient !== oldIngredient) {
-                ingredientHtml += '<li>';
+                ingredientHtml += '<li id="' + result[e].ingredient + '">';
                 ingredientHtml += '<div class="ingredients-box">';
                 ingredientHtml += '<label for="ingredients">' + result[e].ingredient + '</label>';
                 ingredientHtml += '<ol class ="ingredientslist">';
@@ -252,6 +251,7 @@ function buildShoppingList(result) {
 
             ingredientHtml += '<li> ' + result[e].qty;
             ingredientHtml += '<form class="deleteDb">';
+            ingredientHtml += '<input type="hidden" class = "deleteFromDBName" value=' + result[e].ingredient + ">";
             ingredientHtml += '<input type="hidden" class = "deleteFromDB" value=' + result[e]._id + ">";
 
             ingredientHtml += '<button class ="deletebtn" type="button">';
@@ -332,6 +332,7 @@ $(document).on('click', '.deletebtn', function (event) {
     $(this).closest('.ingredientslist li').hide();
 
     var idValue = $(this).parent().find('.deleteFromDB').val();
+    var nameValue = $(this).parent().find('.deleteFromDBName').val();
 
     //console.log(deleteObject);
 
@@ -353,6 +354,8 @@ $(document).on('click', '.deletebtn', function (event) {
                     url: '/delete-empty-ingredients/'
                 })
                 .done(function (result) {
+                    console.log(result);
+                    $('#' + nameValue).remove();
                     alert("parent ingredient deleted");
                 })
                 .fail(function (jqXHR, error, errorThrown) {
@@ -424,6 +427,7 @@ $(document).on('click', '.addbtn', function (event) {
             console.log(errorThrown);
         });
 });
+
 
 $(document).on('click', '#addbutton', function (event) {
     event.preventDefault();

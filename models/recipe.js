@@ -34,8 +34,6 @@ var recipeSchema = new mongoose.Schema({
         type: String,
         required: false
     }
-
-
 });
 
 var recipe = mongoose.model('recipe', recipeSchema);
