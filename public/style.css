@@ -193,12 +193,13 @@ span.newuser {
 
 
 .js-shoppinglist-page li {
+    border-top: 1px solid white;
     width: 47%;
     display: inline-block;
     margin-left: 1%;
     margin-right: 1%;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+    /* margin-top: 5rem; */
+    margin-bottom: 1rem;
     vertical-align: top;
 }
 
@@ -222,11 +223,9 @@ span.newuser {
     display: inline-block;
     margin-left: 2%;
     margin-right: 1%;
-    margin-top: 7rem;
     margin-bottom: 2rem;
     vertical-align: top;
     border: 3px solid #f1f1f1;
-    background: linear-gradient(to right, rgba(20, 20, 20, 0.08), rgb(20, 20, 20));
 }
 
 
@@ -237,24 +236,24 @@ span.newuser {
 }
 
 .recipeslist li {
-    text-align: center;
     display: block;
     margin: 10px;
-    list-style-type: square;
-    margin-left: 25%;
+    /* margin-left: 25%; */
+    width: 90%;
+    margin: 0.5rem auto;
 }
 
 .ingredientlistfromrecipe {
     display: block;
     text-align: left;
-    list-style-type: square;
     color: #4CAF50;
+    background: linear-gradient(to right, rgba(20, 20, 20, 0.08), rgb(20, 20, 20));
 }
 
 .ingredientslist li {
     text-align: center;
-    display: inline-block;
-    width: 46%;
+    display: block;
+    width: 100%;
 }
 
 
@@ -262,6 +261,17 @@ span.newuser {
     text-align: center;
     font-size: 20px;
     margin-top: 1rem;
+}
+
+.recipetitle label {
+    height: 54px;
+    overflow-x: auto;
+    display: block;
+}
+
+.ingredientBox {
+    height: 160px;
+    overflow-x: auto;
 }
 
 label {
@@ -275,10 +285,13 @@ label {
 
 .ingredients-box {
     text-align: center;
-    padding: 25px;
-    width: 107%;
-    margin-bottom: -10rem;
+    padding: 5px 10px;
+    width: 100%;
+    /* margin-bottom: -10rem; */
 }
+
+
+
 
 
 
@@ -290,6 +303,7 @@ footer {
 
 footer li {
     display: inline-block;
+    width: auto;
     text-decoration: none;
     padding-top: 20px;
     padding-bottom: 10px;

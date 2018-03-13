@@ -341,7 +341,6 @@ $(document).on('click', '.deletebtn', function (event) {
             method: 'DELETE',
             dataType: 'json',
             contentType: 'application/json',
-
             url: '/delete/' + idValue,
         })
         .done(function (result) {
@@ -356,7 +355,22 @@ $(document).on('click', '.deletebtn', function (event) {
                 .done(function (result) {
                     console.log(result);
                     $('#' + nameValue).remove();
-                    alert("parent ingredient deleted");
+                })
+                .fail(function (jqXHR, error, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(error);
+                    console.log(errorThrown);
+                });
+
+            //refresh the container with all the ingredients
+            $.ajax({
+                    method: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '/retrieve-sList/',
+                })
+                .done(function (result) {
+                    buildShoppingList(result);
                 })
                 .fail(function (jqXHR, error, errorThrown) {
                     console.log(jqXHR);
