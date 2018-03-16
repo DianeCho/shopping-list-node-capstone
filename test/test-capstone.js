@@ -24,7 +24,6 @@ describe('shopping-list-node-capstone', function () {
                 'rating': '4',
                 'course': 'main',
                 'id': 'Homemade-Fish-Balls-with-Spicy-Fish-Ball-Sauce-2272743',
-                //            'day': 'monday',
                 'shortList': '[\"1 pound fish flesh\",\"2 tablespoons cornstarch\",\"2 teaspoons salt\",\"1 teaspoon sugar\",\"¼ cup cold water\",\"2 cups water\",\"⅓ cup soy sauce\",\"1 head garlic, peeled and minced\",\"3 shallots, peeled and finely chopped\",\"4 to 5Thai chili peppers, stemmed and chopped\",\"1 cup brown sugar\",\"1 tablespoon flour\",\"1 tablespoon cornstarch\",\"1 teaspoon salt or to taste\",\"½ teaspoon pepper\",\"oil\"]',
 
             })
